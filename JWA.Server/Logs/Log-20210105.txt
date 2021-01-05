@@ -1,0 +1,6 @@
+2021-01-05T15:07:47.1070678-04:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-01-05T15:07:47.1300592-04:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-01-05T15:07:47.1360131-04:00  [INF] Content root path: "C:\Users\Mayra\Source\Repos\JWA.Server\JWA.Server" (b5d60022)
+2021-01-05T15:08:07.7075928-04:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-01-05T15:08:07.7429369-04:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-01-05T15:08:07.7483074-04:00  [INF] Content root path: "C:\Users\Mayra\Source\Repos\JWA.Server\JWA.Server" (b5d60022)

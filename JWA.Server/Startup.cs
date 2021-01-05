@@ -66,12 +66,13 @@ namespace JWA.Server
 
             app.UseStaticFiles();
 
-            //app.UseSwagger();
+            app.UseSwagger();
 
-            //app.UseSwaggerUI(options => {
-            //    options.SwaggerEndpoint("../swagger/v1/swagger.json", "JanWay API");
-            //    options.RoutePrefix = string.Empty;
-            //});
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("../swagger/v1/swagger.json", "JanWay API");
+                options.RoutePrefix = string.Empty;
+            });
 
             app.UseRouting();
 
