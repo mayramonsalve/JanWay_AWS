@@ -1,0 +1,15 @@
+C:\Users\Mayra\Source\Repos\JWA.Server\JWA.Infrastructure\obj\Release\netcoreapp3.1\JWA.Infrastructure.csprojAssemblyReference.cache
+C:\Users\Mayra\Source\Repos\JWA.Server\JWA.Infrastructure\obj\Release\netcoreapp3.1\JWA.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\Mayra\Source\Repos\JWA.Server\JWA.Infrastructure\obj\Release\netcoreapp3.1\JWA.Infrastructure.AssemblyInfo.cs
+C:\Users\Mayra\Source\Repos\JWA.Server\JWA.Infrastructure\obj\Release\netcoreapp3.1\JWA.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\Mayra\Source\Repos\JWA.Server\JWA.Infrastructure\bin\Release\netcoreapp3.1\JWA.Infrastructure.deps.json
+C:\Users\Mayra\Source\Repos\JWA.Server\JWA.Infrastructure\bin\Release\netcoreapp3.1\JWA.Infrastructure.runtimeconfig.json
+C:\Users\Mayra\Source\Repos\JWA.Server\JWA.Infrastructure\bin\Release\netcoreapp3.1\JWA.Infrastructure.runtimeconfig.dev.json
+C:\Users\Mayra\Source\Repos\JWA.Server\JWA.Infrastructure\bin\Release\netcoreapp3.1\JWA.Infrastructure.dll
+C:\Users\Mayra\Source\Repos\JWA.Server\JWA.Infrastructure\bin\Release\netcoreapp3.1\JWA.Infrastructure.pdb
+C:\Users\Mayra\Source\Repos\JWA.Server\JWA.Infrastructure\bin\Release\netcoreapp3.1\JWA.Core.dll
+C:\Users\Mayra\Source\Repos\JWA.Server\JWA.Infrastructure\bin\Release\netcoreapp3.1\JWA.Core.pdb
+C:\Users\Mayra\Source\Repos\JWA.Server\JWA.Infrastructure\obj\Release\netcoreapp3.1\JWA.Infrastructure.csproj.CopyComplete
+C:\Users\Mayra\Source\Repos\JWA.Server\JWA.Infrastructure\obj\Release\netcoreapp3.1\JWA.Infrastructure.dll
+C:\Users\Mayra\Source\Repos\JWA.Server\JWA.Infrastructure\obj\Release\netcoreapp3.1\JWA.Infrastructure.pdb
+C:\Users\Mayra\Source\Repos\JWA.Server\JWA.Infrastructure\obj\Release\netcoreapp3.1\JWA.Infrastructure.genruntimeconfig.cache

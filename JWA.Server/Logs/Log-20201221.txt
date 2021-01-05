@@ -1,0 +1,5 @@
+2020-12-21T12:22:39.2201906-04:00  [INF] Now listening on: "https://localhost:5001" (d826f4b8)
+2020-12-21T12:22:39.2406971-04:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-12-21T12:22:39.2499969-04:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-12-21T12:22:39.2560255-04:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-12-21T12:22:39.2638611-04:00  [INF] Content root path: "C:\Users\Mayra\Source\Repos\JWA.Server\JWA.Server" (b5d60022)

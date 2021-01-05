@@ -1,0 +1,3 @@
+2020-12-30T19:10:59.0561823-04:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-12-30T19:10:59.0752826-04:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-12-30T19:10:59.0778597-04:00  [INF] Content root path: "C:\Users\Mayra\Source\Repos\JWA.Server\JWA.Server" (b5d60022)
