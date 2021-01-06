@@ -28,6 +28,7 @@ namespace JWA.Infrastructure.Repositories
         private readonly IUnitRepository _unitRepository;
 
         private readonly IUserRepository _userRepository;
+        private readonly Microsoft.AspNetCore.Identity.UserManager<User> _userManager;
         public UnitOfWork(JWAContext context)
         {
             _context = context;
@@ -40,7 +41,7 @@ namespace JWA.Infrastructure.Repositories
         public IRoleRepository RoleRepository => _roleRepository ?? new RoleRepository(_context);
         public ISupervisorRepository SupervisorRepository => _supervisorRepository ?? new SupervisorRepository(_context);
         public IUnitRepository UnitRepository => _unitRepository ?? new UnitRepository(_context);
-        public IUserRepository UserRepository => _userRepository ?? new UserRepository(_context);
+        public IUserRepository UserRepository => _userRepository ?? new UserRepository(_context, _userManager);
 
         public void Dispose()
         {

@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\JWA.Auth\JWA.Auth.csproj" />
     <ProjectReference Include="..\JWA.Core\JWA.Core.csproj" />
     <ProjectReference Include="..\JWA.Infrastructure\JWA.Infrastructure.csproj" />
   </ItemGroup>

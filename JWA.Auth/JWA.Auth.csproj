@@ -8,5 +8,10 @@
     <PackageReference Include="IdentityServer4" Version="4.1.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\JWA.Core\JWA.Core.csproj" />
+    <ProjectReference Include="..\JWA.Infrastructure\JWA.Infrastructure.csproj" />
+  </ItemGroup>
+
 
 </Project>

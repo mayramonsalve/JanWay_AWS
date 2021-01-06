@@ -14,5 +14,7 @@ namespace JWA.Core.Interfaces
         void Update(User entity);
         Task Delete(Guid id);
         Task<User> GetUserByCredentials(SignIn signIn);
+        User GetUserByEmail(string email);
+        User GetUserByUserName(string email);
     }
 }

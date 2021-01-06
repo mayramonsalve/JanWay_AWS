@@ -25,7 +25,9 @@ namespace JWA.Core.Services
         {
             var invite = await _unitOfWork.InviteRepository.GetByEmail(user.Email);
             if (invite == null)
+            {
                 throw new BusinessException("Invite doesn't exist.");
+            }
             else
             {
                 //if(invite.RoleId != user.RoleId)
@@ -34,6 +36,7 @@ namespace JWA.Core.Services
             SetDefaultValues(user, invite);
             await _unitOfWork.UserRepository.Insert(user);
             await _unitOfWork.SaveChangesAsync();
+            await _unitOfWork.InviteRepository.Delete(invite.Id);
             return user.Id;
         }
 
@@ -118,6 +121,13 @@ namespace JWA.Core.Services
         {
             //user.RoleId = invite.RoleId;
         }
-
+        public User GetUserByEmail(string email)
+        {
+            return _unitOfWork.UserRepository.GetUserByEmail(email);
+        }
+        public User GetUserByUserName(string UserName)
+        {
+            return _unitOfWork.UserRepository.GetUserByUserName(UserName);
+        }
     }
 }

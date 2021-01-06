@@ -78,7 +78,7 @@ namespace JWA.Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var invite = await _inviteService.GetInvite(id);
+            var invite = _inviteService.GetInvite(id);
             var inviteDto = _mapper.Map<InviteDtos>(invite);
             var response = new ApiResponse<InviteDtos>(inviteDto);
             return Ok(response);

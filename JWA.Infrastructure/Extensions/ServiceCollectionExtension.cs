@@ -65,6 +65,8 @@ namespace JWA.Infrastructure.Extensions
             services.AddTransient<IUserService, UserService>();
             services.AddSingleton<IPasswordService, PasswordService>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IOrganizationService, OrganizationService>();
+            services.AddTransient<ISendEmailService, SendEmailService>();
             services.AddSingleton<IUriService>(provider =>
             {
                 var accessor = provider.GetRequiredService<IHttpContextAccessor>();
