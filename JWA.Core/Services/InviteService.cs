@@ -60,9 +60,9 @@ namespace JWA.Core.Services
             return true;
         }
 
-        public async Task<Invite> GetInvite(int id)
+        public Invite GetInvite(int id)
         {
-            return await _unitOfWork.InviteRepository.GetById(id);
+            return _unitOfWork.InviteRepository.GetByInviteId(id);
         }
 
         public async Task<Invite> GetInviteByEmail(string email)
@@ -101,6 +101,34 @@ namespace JWA.Core.Services
 
             return pagedInvites;
         }
+        public async Task<Invite> InsertInvite(Invite invite)
+        {
+            try
+            {
+                var existingInvite = await GetInviteByEmail(invite.Email);
+                if (existingInvite != null)
+                {
+                    throw new BusinessException("Email already exists.");
+                }
+                await _unitOfWork.InviteRepository.Insert(invite);
+                await _unitOfWork.SaveChangesAsync();
 
+                return invite;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public Task<bool> RemoveInvite(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Invite GetInviteByEmailId(string email)
+        {
+            return _unitOfWork.InviteRepository.GetByEmailId(email);
+        }
     }
 }

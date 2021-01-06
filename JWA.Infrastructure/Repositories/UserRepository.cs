@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 
 namespace JWA.Infrastructure.Repositories
@@ -14,10 +16,11 @@ namespace JWA.Infrastructure.Repositories
     {
         private readonly JWAContext _context;
         protected DbSet<User> _entities;
-
-        public UserRepository(JWAContext context)
+        private readonly Microsoft.AspNetCore.Identity.UserManager<User> _userManager;
+        public UserRepository(JWAContext context, Microsoft.AspNetCore.Identity.UserManager<User> userManager)
         {
             _context = context;
+            userManager = userManager;
             _entities = _context.Set<User>();
         }
 
@@ -37,6 +40,9 @@ namespace JWA.Infrastructure.Repositories
 
         public async Task Insert(User entity)
         {
+            var user = new IdentityUser { UserName = entity.UserName, Email = entity.Email };
+            entity.ConcurrencyStamp = user.ConcurrencyStamp;
+            entity.SecurityStamp = user.SecurityStamp;
             await _entities.AddAsync(entity);
         }
 
@@ -49,6 +55,14 @@ namespace JWA.Infrastructure.Repositories
         {
             User entity = await GetById(id);
             _entities.Remove(entity);
+        }
+        public User GetUserByEmail(string email)
+        {
+            return _entities.Where(e => e.Email == email).FirstOrDefault();
+        }
+        public User GetUserByUserName(string username)
+        {
+            return _entities.Where(e => e.UserName == username).FirstOrDefault();
         }
     }
 }

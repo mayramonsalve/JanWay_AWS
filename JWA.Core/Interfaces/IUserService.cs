@@ -16,5 +16,7 @@ namespace JWA.Core.Interfaces
         Task<bool> UpdatePassword(User user);
         Task<bool> DeleteUser(Guid id);
         Task<User> GetUserByCredentials(SignIn signIn);
+        User GetUserByUserName(string UserName);
+        User GetUserByEmail(string email);
     }
 }

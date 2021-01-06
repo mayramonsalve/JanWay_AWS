@@ -7,7 +7,7 @@ namespace JWA.Core.Entities
     {
         public string Email { get; set; }
         public DateTime CreationDate { get; set; }
-        public int RoleId { get; set; }
+        public Guid RoleId { get; set; }
         public int? OrganizationId { get; set; }
         public int? FacilityId { get; set; }
 

@@ -21,7 +21,7 @@ namespace JWA.Core.Services
             _paginationOptions = options.Value;
         }
 
-        public async Task<Role> GetRole(int id)
+        public async Task<Role> GetRole(Guid id)
         {
             return await _unitOfWork.RoleRepository.GetById(id);
         }

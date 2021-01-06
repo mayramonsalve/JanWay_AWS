@@ -18,6 +18,14 @@ namespace JWA.Infrastructure.Repositories
         {
             return await _entities.FirstOrDefaultAsync(e => e.Email.ToLower() == email.ToLower());
         }
+        public Invite GetByEmailId(string email)
+        {
+            return _entities.Where(e => e.Email.ToLower() == email.ToLower()).FirstOrDefault();
+        }
 
+        public Invite GetByInviteId(int id)
+        {
+            return _entities.Where(e => e.Id == id).FirstOrDefault();
+        }
     }
 }
