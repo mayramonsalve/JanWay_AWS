@@ -3,10 +3,16 @@ using JWA.Core.CustomEntities;
 using JWA.Core.Entities;
 using JWA.Core.Interfaces;
 using JWA.Infrastructure.Interfaces;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -22,16 +28,17 @@ namespace JWA.Auth.Controllers
         private readonly IInviteService _inviteservice;
         private readonly IOrganizationService _organizationService;
         private readonly ISendEmailService _sendEmailService;
-
+        private readonly IUserRolesService _userRolesService;
         public UserController(IUserService userService, IPasswordService passwordService,
                                 IInviteService inviteservice, IOrganizationService organizationService,
-                                ISendEmailService sendEmailService)
+                                ISendEmailService sendEmailService, IUserRolesService userRolesService)
         {
             _userService = userService;
             _passwordService = passwordService;
             _inviteservice = inviteservice;
             _organizationService = organizationService;
             _sendEmailService = sendEmailService;
+            _userRolesService = userRolesService;
         }
 
         [HttpPost]
@@ -40,7 +47,7 @@ namespace JWA.Auth.Controllers
         {
             try
             {
-                var ExistingUserName = _userService.GetUserByUserName(confirmEmailViewModel.UserName);
+                var ExistingUserName = _userService.GetUserByUserName(confirmEmailViewModel.Email);
                 if (confirmEmailViewModel.Password != confirmEmailViewModel.ConfirmPassword)
                 {
                     return BadRequest("Email is not confirmed");
@@ -56,8 +63,8 @@ namespace JWA.Auth.Controllers
                         User user = new User();
                         user.Id = Guid.NewGuid();
                         user.Email = confirmEmailViewModel.Email;
-                        user.UserName = confirmEmailViewModel.UserName;
-                        user.NormalizedUserName = confirmEmailViewModel.UserName;
+                        user.UserName = confirmEmailViewModel.Email;
+                        user.NormalizedUserName = confirmEmailViewModel.Email;
                         user.NormalizedEmail = confirmEmailViewModel.Email;
                         user.EmailConfirmed = true;
                         user.PasswordHash = _passwordService.Hash(confirmEmailViewModel.Password);
@@ -69,6 +76,10 @@ namespace JWA.Auth.Controllers
 
                         var NewUserId = await _userService.InsertUser(user);
                         var invite = _inviteservice.GetInviteByEmailId(confirmEmailViewModel.Email);
+                        UserRole userRole = new UserRole();
+                        userRole.RoleId = invite.RoleId;
+                        userRole.UserId = NewUserId;
+                        await _userRolesService.InsertRoleUser(userRole);
                         var invitedelete = _inviteservice.DeleteInvite(invite.Id);
                         return Ok(user);
                     }
@@ -86,7 +97,7 @@ namespace JWA.Auth.Controllers
 
         [HttpPost]
         [Route("InviteUser")]
-        public async Task InviteUser(InviteViewModel inviteViewModel)
+        public async Task<IActionResult> InviteUser(InviteViewModel inviteViewModel)
         {
             Invite invite = new Invite();
             invite.Email = inviteViewModel.Email;
@@ -109,8 +120,9 @@ namespace JWA.Auth.Controllers
             var organisation = await _organizationService.GetOrganization(inviteViewModel.organization_id);
             var emailBody = string.Format(AppConstants.InviteEmailTemplate, baseUrl);
             var emailsubjects = string.Format(AppConstants.InviteEmailSubject, organisation.Name);
-            _sendEmailService.send_email(invite.Email, emailsubjects, emailBody);
-
+            var apiKey = AppConstants.SendGridKey;
+            var result = await _sendEmailService.send_email_sendgrid(apiKey, invite.Email, emailsubjects, emailBody);
+            return Ok(result);
         }
 
         [HttpPost]
@@ -135,15 +147,16 @@ namespace JWA.Auth.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles= "TestTRole")]
         [Route("ChangePassword")]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel changePasswordViewModel)
         {
             try
             {
-                var User = _userService.GetUserByUserName(changePasswordViewModel.UserName);
+                var User = _userService.GetUserByUserName(changePasswordViewModel.Email);
                 if (User == null)
                 {
-                    return BadRequest(changePasswordViewModel.UserName + "is not registered. Or it is not confirmed");
+                    return BadRequest(changePasswordViewModel.Email + "is not registered. Or it is not confirmed");
                 }
                 else
                 {
@@ -189,8 +202,9 @@ namespace JWA.Auth.Controllers
                 }
                 else
                 {
+                    var apiKey = AppConstants.SendGridKey;
                     var EmailBody = string.Format(AppConstants.ForgetPasswordEmailBody, token);
-                    _sendEmailService.send_email(email, AppConstants.ForgetPasswordEmailSubject, EmailBody);
+                    _sendEmailService.send_email_sendgrid(apiKey, email, AppConstants.ForgetPasswordEmailSubject, EmailBody);
                 }
             }
             catch (Exception ex)
@@ -229,16 +243,37 @@ namespace JWA.Auth.Controllers
 
         [HttpPost]
         [Route("EditProfile")]
-        public async Task<IActionResult> EditProfile(User user)
+        public async Task<IActionResult> EditProfile(EditProfileViewModel user)
         {
-            #region get user details
-            var ExistingUser = _userService.GetUserByEmail(user.Email);
-            if (ExistingUser == null)
+            try
             {
-                return BadRequest("user does not exists");
+                #region get user details
+                var ExistingUser = _userService.GetUserByEmail(user.Email);
+                if (ExistingUser == null)
+                {
+                    return BadRequest("user does not exists");
+                }
+                #endregion
+
+                #region update user info
+                ExistingUser.Email = user.Email;
+                ExistingUser.PhoneNumber = user.Phone == null ? ExistingUser.PhoneNumber : user.Phone;
+                var result = await _userService.UpdateUser(ExistingUser);
+                #endregion
+
+                if (result)
+                {
+                    return Ok(ExistingUser);
+                }
+                else
+                {
+                    return BadRequest("user not updated successsfully");
+                }
             }
-            #endregion
-            return Ok();
+            catch (Exception ex)
+            {
+                return Ok(ex);
+            }
         }
 
         [HttpPost]
@@ -285,5 +320,29 @@ namespace JWA.Auth.Controllers
             return Ok();
         }
 
+        [HttpGet]
+        [Route("ExternalLoginGetRequest")]
+        public IActionResult ExternalLoginGetRequest()
+        {
+            var properties = new AuthenticationProperties { RedirectUri = Url.Action("ExternalLoginPostRequest") };
+            return Challenge(properties, GoogleDefaults.AuthenticationScheme);
+        }
+        [HttpGet]
+        [Route("ExternalLoginPostRequest")]
+        public async Task<IActionResult> ExternalLoginPostRequest()
+        {
+            var result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            var claims = result.Principal.Identities.FirstOrDefault()
+                .Claims.Select(Claim => new
+                {
+                    Claim.Issuer,
+                    Claim.OriginalIssuer,
+                    Claim.Type,
+                    Claim.Value
+                });
+
+            return Ok(claims);
+        }
     }
 }

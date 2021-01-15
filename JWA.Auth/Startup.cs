@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using JWA.Core.Entities;
+using JWA.Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace JWA.Auth
 {
@@ -26,6 +30,20 @@ namespace JWA.Auth
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddAuthentication(options=> {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            })
+                .AddCookie(options=>
+                {
+                    options.LoginPath = "/api/User/ExternalLoginGetRequest";
+                })
+                .AddGoogle(Options =>
+                {
+                    Options.ClientId = "840629081899-n0vfcm1pdq3lhmg790uj7v2gt2sdh6gf.apps.googleusercontent.com";
+                    Options.ClientSecret = "-rCvwsiAQihHwNghSudMouQb";
+                });
+            services.AddIdentity<User, UserRole>();
 
             services.AddIdentityServer()
             .AddInMemoryIdentityResources(ServerConfiguration.IdentityResources)
@@ -49,7 +67,7 @@ namespace JWA.Auth
             app.UseRouting();
 
             app.UseIdentityServer();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
