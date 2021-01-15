@@ -16,11 +16,10 @@ namespace JWA.Infrastructure.Repositories
     {
         private readonly JWAContext _context;
         protected DbSet<User> _entities;
-        private readonly Microsoft.AspNetCore.Identity.UserManager<User> _userManager;
-        public UserRepository(JWAContext context, Microsoft.AspNetCore.Identity.UserManager<User> userManager)
+
+        public UserRepository(JWAContext context)
         {
             _context = context;
-            userManager = userManager;
             _entities = _context.Set<User>();
         }
 
@@ -43,6 +42,10 @@ namespace JWA.Infrastructure.Repositories
             var user = new IdentityUser { UserName = entity.UserName, Email = entity.Email };
             entity.ConcurrencyStamp = user.ConcurrencyStamp;
             entity.SecurityStamp = user.SecurityStamp;
+            IdentityUser user1 = new IdentityUser();
+            user1.UserName = entity.UserName;
+            user1.Email = entity.Email;
+            //var result = await _userManager.CreateAsync(entity, entity.PasswordHash);
             await _entities.AddAsync(entity);
         }
 
