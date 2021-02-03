@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace JWA.Core.Entities
 {
@@ -11,7 +12,7 @@ namespace JWA.Core.Entities
             RoleClaims = new HashSet<RoleClaim>();
             UserRoles = new HashSet<UserRole>();
         }
-
+        [Key]
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string NormalizedName { get; set; }

@@ -16,6 +16,5 @@ namespace JWA.Core.Interfaces
         IUserRepository UserRepository { get; }
         void SaveChanges();
         Task SaveChangesAsync();
-        IUserRolesRepository UserRolesRepository { get; }
     }
 }

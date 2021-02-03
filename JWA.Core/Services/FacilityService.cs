@@ -1,12 +1,7 @@
 ﻿using JWA.Core.CustomEntities;
 using JWA.Core.Entities;
-using JWA.Core.Exceptions;
 using JWA.Core.Interfaces;
-using JWA.Core.QueryFilters;
 using Microsoft.Extensions.Options;
-using System;
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace JWA.Core.Services
@@ -15,11 +10,12 @@ namespace JWA.Core.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly PaginationOptions _paginationOptions;
+        private readonly IFacilityRepository facilityRepository;
 
-        public FacilityService(IUnitOfWork unitOfWork, IOptions<PaginationOptions> options)
+        public FacilityService(IOptions<PaginationOptions> options,IFacilityRepository facilityRepository)
         {
-            _unitOfWork = unitOfWork;
             _paginationOptions = options.Value;
+            this.facilityRepository = facilityRepository;
         }
 
         public async Task InsertFacility(Facility facility)
@@ -36,9 +32,9 @@ namespace JWA.Core.Services
             return true;
         }
 
-        public async Task<Facility> GetFacility(int id)
+        public Facility GetFacilityById(int id)
         {
-            return await _unitOfWork.FacilityRepository.GetById(id);
+            return facilityRepository.GetFacilityById(id);
         }
 
         public PagedList<Facility> GetFacilities()//InviteQueryFilter filters)

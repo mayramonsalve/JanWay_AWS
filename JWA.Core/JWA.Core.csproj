@@ -11,11 +11,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="DTOs\ChangeUserPasswordDto.cs" />
+    <Compile Remove="DTOs\ConfirmEmailDto.cs" />
+    <Compile Remove="DTOs\EditProfileDto.cs" />
+    <Compile Remove="DTOs\EmailDto.cs" />
+    <Compile Remove="DTOs\RecoverPasswordDto.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Enumerations\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.Identity.EntityFramework" Version="2.2.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.8" />
     <PackageReference Include="SendGrid" Version="9.22.0" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />

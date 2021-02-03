@@ -5,13 +5,48 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="IdentityServer4" Version="4.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.0" />
+    <Compile Remove="Interface\**" />
+    <Compile Remove="Repository\**" />
+    <Content Remove="Interface\**" />
+    <Content Remove="Repository\**" />
+    <EmbeddedResource Remove="Interface\**" />
+    <EmbeddedResource Remove="Repository\**" />
+    <None Remove="Interface\**" />
+    <None Remove="Repository\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\JWA.Core\JWA.Core.csproj" />
-    <ProjectReference Include="..\JWA.Infrastructure\JWA.Infrastructure.csproj" />
+    <Compile Remove="Controllers\AdministrationController.cs" />
+    <Compile Remove="Controllers\WeatherForecastController.cs" />
+    <Compile Remove="Models\ChangeUserViewModel.cs" />
+    <Compile Remove="Models\ConfirmEmailViewModel.cs" />
+    <Compile Remove="Models\EditProfileViewModel.cs" />
+    <Compile Remove="Models\EmailViewModel.cs" />
+    <Compile Remove="Models\Invite.cs" />
+    <Compile Remove="Models\InviteViewModel.cs" />
+    <Compile Remove="Models\LoginViewModel.cs" />
+    <Compile Remove="Models\Organization.cs" />
+    <Compile Remove="Models\RecoverPasswordViewModel.cs" />
+    <Compile Remove="Models\SignIn.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="9.5.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.2" />
+    <PackageReference Include="SendGrid" Version="9.22.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
+    <PackageReference Include="System.Runtime" Version="4.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JWA.Server\JWA.Api.csproj" />
   </ItemGroup>
 
 

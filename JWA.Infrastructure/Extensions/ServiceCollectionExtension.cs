@@ -10,6 +10,7 @@ using JWA.Infrastructure.Repositories;
 using JWA.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -53,7 +54,7 @@ namespace JWA.Infrastructure.Extensions
         {
             //services.Configure<PaginationOptions>(options => configuration.GetSection("Pagination").Bind(options));
             services.Configure<PaginationOptions>(configuration.GetSection("Pagination"));
-            services.Configure<PasswordOptions>(configuration.GetSection("PasswordOptions"));
+            services.Configure<Options.PasswordOptions>(configuration.GetSection("PasswordOptions"));
             return services;
         }
 
@@ -67,7 +68,7 @@ namespace JWA.Infrastructure.Extensions
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IOrganizationService, OrganizationService>();
             services.AddTransient<ISendEmailService, SendEmailService>();
-            services.AddTransient<IUserRolesService, UserRolesService>();
+            
             services.AddSingleton<IUriService>(provider =>
             {
                 var accessor = provider.GetRequiredService<IHttpContextAccessor>();
@@ -123,7 +124,12 @@ namespace JWA.Infrastructure.Extensions
             });*/
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
-            services.AddAuthentication("Bearer")
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
                     .AddJwtBearer(o =>
                     {
                         o.Authority = "http://localhost:5000";
@@ -132,12 +138,17 @@ namespace JWA.Infrastructure.Extensions
                         o.TokenValidationParameters =
                             new TokenValidationParameters
                             {
-                                RoleClaimType = "role"
+                                RoleClaimType = "role",
+                                ValidateIssuer = true,
+                                ValidateAudience = true,
+                                ValidAudience = configuration["JWT:ValidAudience"],
+                                ValidIssuer = configuration["JWT:ValidIssuer"],
+                                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Secret"]))
                             };
+                        o.SaveToken = true;
                     });
             return services;
         }
-
         public static IServiceCollection AddMvcExtension(this IServiceCollection services)
         {
             services.AddMvc(options =>

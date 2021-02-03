@@ -45,7 +45,7 @@ namespace JWA.Core.Services
 
         public async Task InsertSupervisor(Supervisor supervisor)
         {
-            var invite = await _unitOfWork.InviteRepository.GetByEmail(supervisor.User.Email);
+            var invite = _unitOfWork.InviteRepository.GetByEmail(supervisor.User.Email);
 
             if (invite.OrganizationId != supervisor.OrganizationId)
             {

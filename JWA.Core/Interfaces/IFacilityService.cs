@@ -9,7 +9,7 @@ namespace JWA.Core.Interfaces
     public interface IFacilityService
     {
         PagedList<Facility> GetFacilities();// FacilityQueryFilter filters);
-        Task<Facility> GetFacility(int id);
+        Facility GetFacilityById(int id);
         Task InsertFacility(Facility facility);
         Task<bool> DeleteFacility(int id);
     }

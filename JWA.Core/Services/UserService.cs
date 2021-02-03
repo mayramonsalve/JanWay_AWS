@@ -23,7 +23,7 @@ namespace JWA.Core.Services
 
         public async Task<Guid> InsertUser(User user)
         {
-            var invite = await _unitOfWork.InviteRepository.GetByEmail(user.Email);
+            var invite = _unitOfWork.InviteRepository.GetByEmail(user.Email);
             if (invite == null)
             {
                 throw new BusinessException("Invite doesn't exist.");

@@ -15,11 +15,12 @@ namespace JWA.Core.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly PaginationOptions _paginationOptions;
+        private readonly IOrganizationRepository organizationRepository;
 
-        public OrganizationService(IUnitOfWork unitOfWork, IOptions<PaginationOptions> options)
+        public OrganizationService(IOrganizationRepository organizationRepository, IOptions<PaginationOptions> options)
         {
-            _unitOfWork = unitOfWork;
             _paginationOptions = options.Value;
+            this.organizationRepository = organizationRepository;
         }
 
         public async Task InsertOrganization(Organization organization)
@@ -63,7 +64,7 @@ namespace JWA.Core.Services
 
         public async Task<Organization> GetOrganization(int id)
         {
-            return await _unitOfWork.OrganizationRepository.GetById(id);
+            return await organizationRepository.GetById(id);
         }
 
         //public async Task<Organization> GetOrganizationByEmail(string email)

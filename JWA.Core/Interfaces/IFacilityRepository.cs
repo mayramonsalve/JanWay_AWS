@@ -6,5 +6,6 @@ namespace JWA.Core.Interfaces
     public interface IFacilityRepository : IRepository<Facility>
     {
         //Task<Facility> GetByEmail(string email);
+        Facility GetFacilityById(int id);
     }
 }

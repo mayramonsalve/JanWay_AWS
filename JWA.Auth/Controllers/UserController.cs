@@ -1,92 +1,301 @@
 ﻿using JWA.Auth.Models;
-using JWA.Core.CustomEntities;
-using JWA.Core.Entities;
-using JWA.Core.Interfaces;
-using JWA.Infrastructure.Interfaces;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.Google;
+using JWA.Core.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
-
+using CoreInterface = JWA.Core.Interfaces;
 namespace JWA.Auth.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IUserService _userService;
-        private readonly IPasswordService _passwordService;
-        private readonly IInviteService _inviteservice;
-        private readonly IOrganizationService _organizationService;
-        private readonly ISendEmailService _sendEmailService;
-        private readonly IUserRolesService _userRolesService;
-        public UserController(IUserService userService, IPasswordService passwordService,
-                                IInviteService inviteservice, IOrganizationService organizationService,
-                                ISendEmailService sendEmailService, IUserRolesService userRolesService)
+        private readonly UserManager<IdentityUser> userManager;
+        private readonly SignInManager<IdentityUser> signInManager;
+        private readonly IConfiguration configuration;
+        private readonly RoleManager<IdentityRole> roleManager;
+        private readonly CoreInterface.ISendEmailService sendEmailService;
+        private readonly CoreInterface.IInviteService inviteService;
+
+        public UserController(UserManager<IdentityUser> userManager,SignInManager<IdentityUser> signInManager
+                                , IConfiguration configuration, RoleManager<IdentityRole> roleManager
+                                , CoreInterface.ISendEmailService sendEmailService, 
+                                    CoreInterface.IInviteService inviteService)
         {
-            _userService = userService;
-            _passwordService = passwordService;
-            _inviteservice = inviteservice;
-            _organizationService = organizationService;
-            _sendEmailService = sendEmailService;
-            _userRolesService = userRolesService;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
+            this.configuration = configuration;
+            this.roleManager = roleManager;
+            this.sendEmailService = sendEmailService;
+            this.inviteService = inviteService;
         }
 
         [HttpPost]
         [Route("ConfirmEmail")]
-        public async Task<IActionResult> ConfirmEmail(ConfirmEmailViewModel confirmEmailViewModel)
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail(ConfirmEmailDto model)
         {
             try
             {
-                var ExistingUserName = _userService.GetUserByUserName(confirmEmailViewModel.Email);
-                if (confirmEmailViewModel.Password != confirmEmailViewModel.ConfirmPassword)
-                {
-                    return BadRequest("Email is not confirmed");
-                }
-                else if (ExistingUserName != null)
-                {
-                    return BadRequest("UserName already exists");
-                }
-                else
+                if (ModelState.IsValid)
                 {
                     try
                     {
-                        User user = new User();
-                        user.Id = Guid.NewGuid();
-                        user.Email = confirmEmailViewModel.Email;
-                        user.UserName = confirmEmailViewModel.Email;
-                        user.NormalizedUserName = confirmEmailViewModel.Email;
-                        user.NormalizedEmail = confirmEmailViewModel.Email;
-                        user.EmailConfirmed = true;
-                        user.PasswordHash = _passwordService.Hash(confirmEmailViewModel.Password);
-                        user.PhoneNumberConfirmed = false;
-                        user.TwoFactorEnabled = false;
-                        user.LockoutEnabled = false;
-                        user.AccessFailedCount = 0;
-                        user.CreationDate = DateTime.Now;
+                        var user = await userManager.FindByEmailAsync(model.Email);                        
+                        var ResultConfirmed = await userManager.ConfirmEmailAsync(user, model.Token);
+                        if (user.EmailConfirmed)
+                        {
+                            return BadRequest("Email is already confirmed");
+                        }
+                        if (ResultConfirmed.Succeeded)
+                        {
+                            var token = await userManager.GeneratePasswordResetTokenAsync(user);
+                            var result = await userManager.ResetPasswordAsync(user, token, model.Password);
+                            if (user.EmailConfirmed)
+                            {
+                                var inviteduser = inviteService.GetInviteByEmailId(model.Email);
 
-                        var NewUserId = await _userService.InsertUser(user);
-                        var invite = _inviteservice.GetInviteByEmailId(confirmEmailViewModel.Email);
-                        UserRole userRole = new UserRole();
-                        userRole.RoleId = invite.RoleId;
-                        userRole.UserId = NewUserId;
-                        await _userRolesService.InsertRoleUser(userRole);
-                        var invitedelete = _inviteservice.DeleteInvite(invite.Id);
-                        return Ok(user);
+                                var role = await roleManager.FindByIdAsync(inviteduser.RoleId.ToString());
+
+                                var roleresult = await userManager.AddToRoleAsync(user, role.Name);
+                                if (roleresult.Succeeded)
+                                {
+                                    inviteService.RemoveInvite(model.Email);
+                                    return Ok("User confirmed successfully");
+                                }
+                                else
+                                {
+                                    await userManager.DeleteAsync(user);
+                                }
+                            }
+                            else
+                            {
+                                await userManager.DeleteAsync(user);
+                            }
+                            return BadRequest("User confirmation failed");
+                        }
+                        return BadRequest(ResultConfirmed);
                     }
                     catch (Exception ex)
                     {
-                        return BadRequest(ex.Message);
+                        return BadRequest(ex.ToString());
                     }
+                }
+                return BadRequest("Model state is not valid");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message.ToString());
+            }
+        }
+
+        [HttpPost]
+        [Route("ChangePassword")]
+        [Authorize(Roles = "FacilityManager,FacilityAdministrator,OrganizationManager,OrganizationAdministrator")]
+        public async Task<IActionResult> ChangePassword(ChangeUserPasswordDto changeUserViewModel)
+        {
+            try
+            {
+                if (!Request.Headers.TryGetValue("Cookie", out var Cookie))
+                {
+                    return BadRequest("User must be signed in first");
+                }
+                    var user = await userManager.FindByEmailAsync(changeUserViewModel.Email);
+                if (user != null && await userManager.CheckPasswordAsync(user, changeUserViewModel.OldPassword))
+                {
+                    var token = await userManager.GeneratePasswordResetTokenAsync(user);
+                    if (user == null)
+                    {
+                        return BadRequest("User Does Not Exist");
+                    }
+                    var result = await userManager.ResetPasswordAsync(user, token, changeUserViewModel.NewPassword);
+                    return Ok(result);
+                }
+                else
+                {
+                    return BadRequest("Incorrect Current Password or User does not exist");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message.ToString());
+            }
+        }
+        [HttpPost]
+        [Route("ForgotPassword")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ForgotPassword(EmailDto Params)
+        {
+            try
+            {
+                var user = await userManager.FindByEmailAsync(Params.Email);
+                if (user != null && await userManager.IsEmailConfirmedAsync(user))
+                {
+                    string baseUrl = string.Empty;
+                    var PasswordResetToken = await userManager.GeneratePasswordResetTokenAsync(user);
+                    baseUrl = Url.Action("RecoverPassword", "User",
+                            new { token = PasswordResetToken, userId = user.Id}, Request.Scheme);
+                    var API_Key = AppConstants.SendGridKey;
+                    var emailBody = string.Format(AppConstants.RecoverPasswordEmailTemplate, PasswordResetToken);
+                    var emailsubjects = AppConstants.RecoverEmailSubject;
+
+                    var result = await sendEmailService.send_email_sendgrid(API_Key, user.Email, emailsubjects, emailBody);
+                    if (result.StatusCode.ToString() == "Accepted")
+                    {
+                        return Ok(new { result.IsSuccessStatusCode, result.StatusCode });
+                    }
+                }
+                return BadRequest("Either user does not exist or is not confirmed");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message.ToString());
+            }           
+        }
+        [HttpPost]
+        [Route("RecoverPassword")]
+        [Authorize]
+        public async Task<IActionResult> RecoverPassword(RecoverPasswordDto Model)
+        {
+            try
+            {
+                if (Model.Email != null && Model.NewPassword != null)
+                {
+                    var user = await userManager.FindByEmailAsync(Model.Email);
+                    if (user != null)
+                    {
+                        var result = await userManager.ResetPasswordAsync(user, Model.Token, Model.NewPassword);
+                        if (result.Succeeded)
+                        {
+                            return Ok("Password changed successfully");
+                        }
+                    }
+                    return Ok("User does not exist"); 
+                }
+                else
+                {
+                    return BadRequest("Email or Password can not be null");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message.ToString());
+            }
+        }
+        [HttpPost]
+        [Route("EditProfile")]
+        [Authorize]
+        public async Task<IActionResult> EditProfile(EditProfileDto editProfileViewModel)
+        {
+            try
+            {
+                string token = string.Empty;
+                var IsHeader = Request.Headers.TryGetValue("Authorization", out var traceValue);
+                if (IsHeader)
+                {
+                    token = traceValue[0].Split(' ')[2];
+                }
+                var _token = new JwtSecurityTokenHandler();
+                var TokenS = _token.ReadJwtToken(token) as JwtSecurityToken;
+                var TokenMail = TokenS.Claims.FirstOrDefault().Value;
+                if (TokenMail == editProfileViewModel.Email)
+                {
+                    var user = await userManager.FindByEmailAsync(editProfileViewModel.Email);
+                    if (user != null)
+                    {
+                        user.PhoneNumber = editProfileViewModel.Phone;
+                        var result = await userManager.UpdateAsync(user);
+                        if (result.Succeeded)
+                        {
+                            return Ok("Profile Updated successfully");
+                        }
+                        return Ok("Profile updation failed");
+                    }
+                    return BadRequest("User does not exists");
+                }
+                return BadRequest("Invalid Token");
+                
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message.ToString());
+            }
+        }
+        [HttpPost]
+        [Route("SignIn")]
+        [AllowAnonymous]
+        public async Task<IActionResult> SignIn(SignInDto signIn)
+        {
+            try
+            {
+                var user = await userManager.FindByEmailAsync(signIn.Email);
+                if (user != null && await userManager.CheckPasswordAsync(user, signIn.Password))
+                {
+                    var result = await signInManager.PasswordSignInAsync(signIn.Email, signIn.Password, signIn.RememberMe, false);
+                    var userRoles = await userManager.GetRolesAsync(user);
+
+                    var authClaims = new List<Claim>
+                {                                                                         // claims to be added here
+                    new Claim(ClaimTypes.Name, user.UserName),                            //
+                    new Claim(ClaimTypes.Email,user.Email),                               //
+                    new Claim(ClaimTypes.NameIdentifier,user.Id),                         //
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),    //
+                };
+                    foreach (var userRole in userRoles)
+                    {
+                        authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+                    }
+                    var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Secret"]));
+
+                    var token = new JwtSecurityToken(
+                        issuer: configuration["JWT:ValidIssuer"],
+                        audience: configuration["JWT:ValidAudience"],
+                        expires: DateTime.Now.AddDays(30),
+                        claims: authClaims,
+                        signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
+                        );
+                    return Ok(new
+                    {
+                        token = new JwtSecurityTokenHandler().WriteToken(token),
+                        expiration = token.ValidTo,
+                        result = result
+                    });
+                }
+                else
+                {
+                    return BadRequest("username/password is incorrect");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message.ToString());
+            }
+        }
+        [HttpGet]
+        [Route("SignOut")]
+        [Authorize]
+        public async Task<IActionResult> SignOut()
+        {
+            try
+            {
+                if (Request.Headers.TryGetValue("Cookie", out var Cookie))
+                {
+                    await signInManager.SignOutAsync();
+                    return Ok("User signed out");
+                }
+                else
+                {
+                    return BadRequest("User is not Signed In");
                 }
             }
             catch (Exception ex)
@@ -94,255 +303,33 @@ namespace JWA.Auth.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
         [HttpPost]
-        [Route("InviteUser")]
-        public async Task<IActionResult> InviteUser(InviteViewModel inviteViewModel)
-        {
-            Invite invite = new Invite();
-            invite.Email = inviteViewModel.Email;
-            invite.FacilityId = inviteViewModel.FacilityId;
-            invite.OrganizationId = inviteViewModel.organization_id;
-            invite.RoleId = inviteViewModel.RoleId;
-            invite.CreationDate = DateTime.Now;
-            var InvitedUser = await _inviteservice.InsertInvite(invite);
-
-            var claimsIdentity = new ClaimsIdentity(new List<Claim>()
-                                {
-                                   new Claim(ClaimTypes.Name, InvitedUser.Email),
-                                   new Claim(ClaimTypes.NameIdentifier, InvitedUser.Id.ToString()),
-                                 }, "Identity.Application");
-
-            var token = _passwordService.CreateAccessToken(_passwordService.CreateJwtClaims(claimsIdentity));
-
-            var baseUrl = string.Format("{0}://{1}{2}/", Request.Scheme, Request.Host, Request.PathBase) + "api/User/GetInvitedUser?token=" + token;
-            //api / User / GetInvitedUser ? id = 4
-            var organisation = await _organizationService.GetOrganization(inviteViewModel.organization_id);
-            var emailBody = string.Format(AppConstants.InviteEmailTemplate, baseUrl);
-            var emailsubjects = string.Format(AppConstants.InviteEmailSubject, organisation.Name);
-            var apiKey = AppConstants.SendGridKey;
-            var result = await _sendEmailService.send_email_sendgrid(apiKey, invite.Email, emailsubjects, emailBody);
-            return Ok(result);
-        }
-
-        [HttpPost]
-        [Route("GetInvitedUser")]
-        public async Task<IActionResult> GetInvitedUser(string token)
+        [Route("DeleteUser")]
+        [AllowAnonymous]
+        public async Task<IActionResult> DeleteUser(EmailDto Params)
         {
             try
             {
-                var UserDetail = _passwordService.ReadToken(token);
-                var userEmail = UserDetail.Claims.FirstOrDefault().Value;
-
-                var user = _inviteservice.GetInviteByEmailId(userEmail);
-
-                var organisation = await _organizationService.GetOrganization((int)user.OrganizationId);
-
-                return Ok(new { user.Email, organisation.Name });
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        [HttpPost]
-        [Authorize(Roles= "TestTRole")]
-        [Route("ChangePassword")]
-        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel changePasswordViewModel)
-        {
-            try
-            {
-                var User = _userService.GetUserByUserName(changePasswordViewModel.Email);
-                if (User == null)
+                var user = await userManager.FindByEmailAsync(Params.Email);
+                if (user != null)
                 {
-                    return BadRequest(changePasswordViewModel.Email + "is not registered. Or it is not confirmed");
+                    await userManager.DeleteAsync(user);              
                 }
                 else
                 {
-                    var is_password_true = _passwordService.Check(User.PasswordHash, changePasswordViewModel.Password);
-                    if (is_password_true)
-                    {
-                        User.PasswordHash = _passwordService.Hash(changePasswordViewModel.NewPassword);
-                        await _userService.UpdateUser(User);
-                        return Ok("user password is updated successfully");
-                    }
-                    else
-                    {
-                        return BadRequest("Old password is in correct");
-                    }
+                    return Ok("User does not exists");
                 }
+                var userRoles = await userManager.GetRolesAsync(user);
+                foreach (var userRole in userRoles)
+                {
+                    await userManager.RemoveFromRoleAsync(user, userRole);
+                }
+                return Ok("User deleted successfully");
             }
             catch (Exception ex)
             {
-                throw ex;
+                return BadRequest(ex.Message.ToString());
             }
-        }
-
-
-        #region Recover Password
-        [HttpPost]
-        [Route("ForgetPassword")]
-        public void ForgetPassword(string email)
-        {
-            try
-            {
-                var User = _userService.GetUserByEmail(email);
-                var claimsIdentity = new ClaimsIdentity(new List<Claim>()
-                                {
-                                   new Claim(ClaimTypes.Email, User.Email),
-                                   new Claim(ClaimTypes.NameIdentifier, User.Email),
-                                 }, "Identity.Application");
-
-                var token = _passwordService.CreateAccessToken(_passwordService.CreateJwtClaims(claimsIdentity));
-
-                if (User == null)
-                {
-                    throw new Exception(email + "is not registered. Or it is not confirmed");
-                }
-                else
-                {
-                    var apiKey = AppConstants.SendGridKey;
-                    var EmailBody = string.Format(AppConstants.ForgetPasswordEmailBody, token);
-                    _sendEmailService.send_email_sendgrid(apiKey, email, AppConstants.ForgetPasswordEmailSubject, EmailBody);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-        [HttpPost]
-        [Route("RecoverPassword")]
-        public async Task<IActionResult> RecoverPassword(RecoverPasswordViewModel recoverPasswordViewModel)
-        {
-            try
-            {
-                var TokenData = _passwordService.ReadToken(recoverPasswordViewModel.Token);
-                string email = TokenData.Claims.FirstOrDefault().Value;
-                var User = _userService.GetUserByEmail(email);
-
-                if (User == null)
-                {
-                    return BadRequest(email + "is not registered. Or it is not confirmed");
-                }
-                else
-                {
-                    User.PasswordHash = _passwordService.Hash(recoverPasswordViewModel.Password);
-                    await _userService.UpdateUser(User);
-                    return Ok(User);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-        #endregion
-
-
-        [HttpPost]
-        [Route("EditProfile")]
-        public async Task<IActionResult> EditProfile(EditProfileViewModel user)
-        {
-            try
-            {
-                #region get user details
-                var ExistingUser = _userService.GetUserByEmail(user.Email);
-                if (ExistingUser == null)
-                {
-                    return BadRequest("user does not exists");
-                }
-                #endregion
-
-                #region update user info
-                ExistingUser.Email = user.Email;
-                ExistingUser.PhoneNumber = user.Phone == null ? ExistingUser.PhoneNumber : user.Phone;
-                var result = await _userService.UpdateUser(ExistingUser);
-                #endregion
-
-                if (result)
-                {
-                    return Ok(ExistingUser);
-                }
-                else
-                {
-                    return BadRequest("user not updated successsfully");
-                }
-            }
-            catch (Exception ex)
-            {
-                return Ok(ex);
-            }
-        }
-
-        [HttpPost]
-        [Route("UserExists")]
-        public bool UserExists(string token)
-        {
-            bool IsUserExists = false;
-            var TokenData = _passwordService.ReadToken(token);
-            var CheckUserExists = _userService.GetUserByEmail(TokenData.Claims.FirstOrDefault().Value);
-            if (CheckUserExists != null)
-            {
-                IsUserExists = true;
-            }
-            return IsUserExists;
-        }
-
-        [HttpPost]
-        [Route("SignIn")]
-        public IActionResult SignIn(SignIn signIn)
-        {
-            var CheckUserExists = _userService.GetUserByEmail(signIn.Email);
-            if (CheckUserExists != null)
-            {
-                var IsAuthenticated = _passwordService.Check(CheckUserExists.PasswordHash, signIn.Password);
-                if (IsAuthenticated)
-                {
-                    var claimsIdentity = new ClaimsIdentity(new List<Claim>()
-                                {
-                                   new Claim(ClaimTypes.Name, CheckUserExists.Email),
-                                   new Claim(ClaimTypes.SerialNumber, CheckUserExists.Id.ToString()),
-                                   new Claim(ClaimTypes.NameIdentifier, CheckUserExists.UserName),
-                                   new Claim(ClaimTypes.Hash, CheckUserExists.PasswordHash),
-                                }, "Identity.Application");
-
-                    var token = _passwordService.CreateAccessToken(_passwordService.CreateJwtClaims(claimsIdentity));
-
-                    return Ok(new { CheckUserExists.UserName, CheckUserExists.Email, token });
-                }
-            }
-            else
-            {
-                return BadRequest("user does not exists");
-            }
-            return Ok();
-        }
-
-        [HttpGet]
-        [Route("ExternalLoginGetRequest")]
-        public IActionResult ExternalLoginGetRequest()
-        {
-            var properties = new AuthenticationProperties { RedirectUri = Url.Action("ExternalLoginPostRequest") };
-            return Challenge(properties, GoogleDefaults.AuthenticationScheme);
-        }
-        [HttpGet]
-        [Route("ExternalLoginPostRequest")]
-        public async Task<IActionResult> ExternalLoginPostRequest()
-        {
-            var result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-
-            var claims = result.Principal.Identities.FirstOrDefault()
-                .Claims.Select(Claim => new
-                {
-                    Claim.Issuer,
-                    Claim.OriginalIssuer,
-                    Claim.Type,
-                    Claim.Value
-                });
-
-            return Ok(claims);
         }
     }
 }

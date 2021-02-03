@@ -1,5 +1,6 @@
 ﻿using JWA.Api.Response;
 using JWA.Core.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
@@ -38,6 +39,7 @@ namespace JWA.Api.Controllers
 
         [Route("[action]")]
         [HttpGet]
+        [Authorize(Roles = "FacilityManager")]
         public IActionResult request_access(string encodedDeviceId) //encoded_base64_device_id
         {
             string jwt_token = "testJWTtoken";
