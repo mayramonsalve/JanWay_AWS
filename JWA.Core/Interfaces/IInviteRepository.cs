@@ -5,8 +5,10 @@ namespace JWA.Core.Interfaces
 {
     public interface IInviteRepository : IRepository<Invite>
     {
-        Task<Invite> GetByEmail(string email);
+        Invite GetByEmail(string email);
         Invite GetByEmailId(string email);
         Invite GetByInviteId(int id);
+        void SaveChanges();
+        bool RemoveInvite(string email);
     }
 }

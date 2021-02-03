@@ -15,11 +15,12 @@ namespace JWA.Core.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly PaginationOptions _paginationOptions;
+        private readonly IFacilityRepository facilityRepository;
 
-        public FacilityService(IUnitOfWork unitOfWork, IOptions<PaginationOptions> options)
+        public FacilityService(IOptions<PaginationOptions> options,IFacilityRepository facilityRepository)
         {
-            _unitOfWork = unitOfWork;
             _paginationOptions = options.Value;
+            this.facilityRepository = facilityRepository;
         }
 
         public async Task InsertFacility(Facility facility)
@@ -38,7 +39,7 @@ namespace JWA.Core.Services
 
         public async Task<Facility> GetFacility(int id)
         {
-            return await _unitOfWork.FacilityRepository.GetById(id);
+            return await facilityRepository.GetById(id);
         }
 
         public PagedList<Facility> GetFacilities()//InviteQueryFilter filters)

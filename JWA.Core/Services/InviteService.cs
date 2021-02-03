@@ -14,17 +14,18 @@ namespace JWA.Core.Services
     public class InviteService : IInviteService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IInviteRepository inviteRepository;
         private readonly PaginationOptions _paginationOptions;
 
-        public InviteService(IUnitOfWork unitOfWork, IOptions<PaginationOptions> options)
+        public InviteService(IOptions<PaginationOptions> options, IInviteRepository inviteRepository)
         {
-            _unitOfWork = unitOfWork;
+            this.inviteRepository = inviteRepository;
             _paginationOptions = options.Value;
         }
 
         public async Task InsertInvite(Invite invite, ClaimsPrincipal User)
         {
-            var existingInvite = await GetInviteByEmail(invite.Email);
+            var existingInvite = GetInviteByEmail(invite.Email);
             if(existingInvite != null)
                 throw new BusinessException("Email already exists.");
             var role = await _unitOfWork.RoleRepository.GetById(invite.RoleId);
@@ -65,9 +66,9 @@ namespace JWA.Core.Services
             return _unitOfWork.InviteRepository.GetByInviteId(id);
         }
 
-        public async Task<Invite> GetInviteByEmail(string email)
+        public Invite GetInviteByEmail(string email)
         {
-            return await _unitOfWork.InviteRepository.GetByEmail(email);
+            return _unitOfWork.InviteRepository.GetByEmail(email);
         }
 
         public PagedList<Invite> GetInvites(InviteQueryFilter filters)
@@ -105,14 +106,14 @@ namespace JWA.Core.Services
         {
             try
             {
-                var existingInvite = await GetInviteByEmail(invite.Email);
+                var existingInvite = GetInviteByEmailId(invite.Email);
                 if (existingInvite != null)
                 {
                     throw new BusinessException("Email already exists.");
                 }
-                await _unitOfWork.InviteRepository.Insert(invite);
-                await _unitOfWork.SaveChangesAsync();
-
+                await inviteRepository.Insert(invite);
+                //await GetInviteByEmailId.SaveChangesAsync();
+                inviteRepository.SaveChanges();
                 return invite;
             }
             catch (Exception ex)
@@ -121,14 +122,14 @@ namespace JWA.Core.Services
             }
         }
 
-        public Task<bool> RemoveInvite(int id)
+        public bool RemoveInvite(string email)
         {
-            throw new NotImplementedException();
+            return inviteRepository.RemoveInvite(email);
         }
 
         public Invite GetInviteByEmailId(string email)
         {
-            return _unitOfWork.InviteRepository.GetByEmailId(email);
+            return inviteRepository.GetByEmail(email);
         }
     }
 }
