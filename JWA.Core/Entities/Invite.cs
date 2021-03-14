@@ -5,6 +5,7 @@ namespace JWA.Core.Entities
 {
     public partial class Invite : BaseEntity
     {
+        public int Id { get; set; }
         public string Email { get; set; }
         public DateTime CreationDate { get; set; }
         public Guid RoleId { get; set; }

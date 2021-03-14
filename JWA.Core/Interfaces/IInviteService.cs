@@ -12,7 +12,7 @@ namespace JWA.Core.Interfaces
         Invite GetInvite(int id);
         Task InsertInvite(Invite user, ClaimsPrincipal User);
         Task<bool> DeleteInvite(int id);
-        Task<bool> RemoveInvite(int id);
+        bool RemoveInvite(string email  );
         Invite GetInviteByEmailId(string email);
         Task<Invite> InsertInvite(Invite invite);
     }

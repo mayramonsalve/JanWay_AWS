@@ -11,12 +11,16 @@ namespace JWA.Infrastructure.Repositories
 {
     public class InviteRepository : BaseRepository<Invite>, IInviteRepository
     {
-        public InviteRepository(JWAContext context) : base(context)
-        { }
+        private readonly JWAContext context;
 
-        public async Task<Invite> GetByEmail(string email)
+        public InviteRepository(JWAContext context) : base(context)
         {
-            return await _entities.FirstOrDefaultAsync(e => e.Email.ToLower() == email.ToLower());
+            this.context = context;
+        }
+
+        public Invite GetByEmail(string email)
+        {
+            return _entities.Where(x => x.Email == email).FirstOrDefault();
         }
         public Invite GetByEmailId(string email)
         {
@@ -26,6 +30,29 @@ namespace JWA.Infrastructure.Repositories
         public Invite GetByInviteId(int id)
         {
             return _entities.Where(e => e.Id == id).FirstOrDefault();
+        }
+        public bool RemoveInvite(string email)
+        {
+            try
+            {
+                var invite = GetByEmailId(email);
+                var result = context.Remove(invite);
+                if (result.State.ToString() == "Deleted")
+                {
+                    SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch (System.Exception)
+            {
+                return false;
+            }
+            
+        }
+        public void SaveChanges()
+        {
+            context.SaveChanges();
         }
     }
 }

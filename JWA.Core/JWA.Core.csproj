@@ -11,6 +11,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="DTOs\ChangeUserPasswordDto.cs" />
+    <Compile Remove="DTOs\ConfirmEmailDto.cs" />
+    <Compile Remove="DTOs\EditProfileDto.cs" />
+    <Compile Remove="DTOs\EmailDto.cs" />
+    <Compile Remove="DTOs\RecoverPasswordDto.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Enumerations\" />
   </ItemGroup>
 

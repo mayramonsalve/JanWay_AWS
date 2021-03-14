@@ -29,7 +29,6 @@ namespace JWA.Infrastructure.Repositories
         private readonly IUnitRepository _unitRepository;
 
         private readonly IUserRepository _userRepository;
-        private readonly IUserRolesRepository _userRoleRepository;
 
         public UnitOfWork(JWAContext context)
         {
@@ -44,7 +43,6 @@ namespace JWA.Infrastructure.Repositories
         public ISupervisorRepository SupervisorRepository => _supervisorRepository ?? new SupervisorRepository(_context);
         public IUnitRepository UnitRepository => _unitRepository ?? new UnitRepository(_context);
         public IUserRepository UserRepository => _userRepository ?? new UserRepository(_context);
-        public IUserRolesRepository UserRolesRepository => _userRoleRepository ?? new UserRolesRepository(_context);
 
         public void Dispose()
         {

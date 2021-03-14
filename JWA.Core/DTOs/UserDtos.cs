@@ -55,5 +55,38 @@ namespace JWA.Core.DTOs
         public int Id { get; set; }
         public string Password { get; set; }
     }
-
+    public class EmailDto
+    {
+        public string Email { get; set; }
+    }
+    public class ChangeUserPasswordDto
+    {
+        public string Email { get; set; }
+        public string OldPassword { get; set; }
+        public string NewPassword { get; set; }
+    }
+    public class ConfirmEmailDto
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string ConfirmPassword { get; set; }
+        public string token { get; set; }
+    }
+    public class EditProfileDto
+    {
+        public string Email { get; set; }
+        public string Phone { get; set; }
+    }
+    public class RecoverPasswordDto
+    {
+        public string Token { get; set; }
+        public string Email { get; set; }
+        public string NewPassword { get; set; }
+    }
+    public class SignInDto
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public bool RememberMe { get; set; }
+    }
 }
