@@ -14,7 +14,7 @@ namespace JWA.Core.Services
     {
         public void send_email(string emailTo,string emailSubject,string emailBody)
         {
-            string sender_Email_Address = "";
+            string sender_Email_Address = "mayraalejandra3190@gmail.com";
             var sender_Email = new MailAddress(sender_Email_Address, sender_Email_Address);
             var receiverEmail = new MailAddress(emailTo, emailTo);
 
@@ -25,7 +25,7 @@ namespace JWA.Core.Services
                 EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = false,
-                Credentials = new System.Net.NetworkCredential(sender_Email.Address, "")
+                Credentials = new System.Net.NetworkCredential(sender_Email.Address, "Aleja3190++")
             };
             using (var mess = new MailMessage(sender_Email, receiverEmail)
             {

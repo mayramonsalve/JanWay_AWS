@@ -1,1 +1,7 @@
+<<<<<<< Updated upstream
 ﻿<StaticWebAssets Version="1.0" />
+=======
+﻿<StaticWebAssets Version="1.0">
+  <ContentRoot BasePath="_content/JWA.Auth" Path="C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\wwwroot\" />
+</StaticWebAssets>
+>>>>>>> Stashed changes

@@ -5,6 +5,109 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="obj\Debug\netcoreapp3.1\.NETCoreApp,Version=v3.1.AssemblyAttributes.cs" />
+    <Compile Include="obj\Debug\netcoreapp3.1\JWA.Auth.AssemblyInfo.cs" />
+    <Compile Include="obj\Debug\netcoreapp3.1\JWA.Auth.MvcApplicationPartsAssemblyInfo.cs" />
+    <Compile Include="obj\Debug\netcoreapp3.1\JWA.Auth.RazorAssemblyInfo.cs" />
+    <Compile Include="obj\Debug\netcoreapp3.1\JWA.Auth.RazorTargetAssemblyInfo.cs" />
+    <Compile Include="obj\Debug\netcoreapp3.1\Razor\Views\Account\AccessDenied.cshtml.g.cs" />
+    <Compile Include="obj\Debug\netcoreapp3.1\Razor\Views\Account\LoggedOut.cshtml.g.cs" />
+    <Compile Include="obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs" />
+    <Compile Include="obj\Debug\netcoreapp3.1\Razor\Views\Account\Logout.cshtml.g.cs" />
+    <Compile Include="obj\Debug\netcoreapp3.1\Razor\Views\Consent\Index.cshtml.g.cs" />
+    <Compile Include="obj\Debug\netcoreapp3.1\Razor\Views\Device\Success.cshtml.g.cs" />
+    <Compile Include="obj\Debug\netcoreapp3.1\Razor\Views\Device\UserCodeCapture.cshtml.g.cs" />
+    <Compile Include="obj\Debug\netcoreapp3.1\Razor\Views\Device\UserCodeConfirmation.cshtml.g.cs" />
+    <Compile Include="obj\Debug\netcoreapp3.1\Razor\Views\Diagnostics\Index.cshtml.g.cs" />
+    <Compile Include="obj\Debug\netcoreapp3.1\Razor\Views\Grants\Index.cshtml.g.cs" />
+    <Compile Include="obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs" />
+    <Compile Include="obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs" />
+    <Compile Include="obj\Debug\netcoreapp3.1\Razor\Views\Shared\Redirect.cshtml.g.cs" />
+    <Compile Include="obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs" />
+    <Compile Include="obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Nav.cshtml.g.cs" />
+    <Compile Include="obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ScopeListItem.cshtml.g.cs" />
+    <Compile Include="obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationSummary.cshtml.g.cs" />
+    <Compile Include="obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs" />
+    <Compile Include="obj\Debug\netcoreapp3.1\Razor\Views\_ViewStart.cshtml.g.cs" />
+    <Compile Include="obj\Release\netcoreapp3.1\.NETCoreApp,Version=v3.1.AssemblyAttributes.cs" />
+    <Compile Include="obj\Release\netcoreapp3.1\JWA.Auth.AssemblyInfo.cs" />
+    <Compile Include="obj\Release\netcoreapp3.1\JWA.Auth.MvcApplicationPartsAssemblyInfo.cs" />
+    <Compile Include="obj\Release\netcoreapp3.1\JWA.Auth.RazorAssemblyInfo.cs" />
+    <Compile Include="obj\Release\netcoreapp3.1\JWA.Auth.RazorTargetAssemblyInfo.cs" />
+    <Compile Include="obj\Release\netcoreapp3.1\Razor\Views\Account\AccessDenied.cshtml.g.cs" />
+    <Compile Include="obj\Release\netcoreapp3.1\Razor\Views\Account\LoggedOut.cshtml.g.cs" />
+    <Compile Include="obj\Release\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs" />
+    <Compile Include="obj\Release\netcoreapp3.1\Razor\Views\Account\Logout.cshtml.g.cs" />
+    <Compile Include="obj\Release\netcoreapp3.1\Razor\Views\Consent\Index.cshtml.g.cs" />
+    <Compile Include="obj\Release\netcoreapp3.1\Razor\Views\Device\Success.cshtml.g.cs" />
+    <Compile Include="obj\Release\netcoreapp3.1\Razor\Views\Device\UserCodeCapture.cshtml.g.cs" />
+    <Compile Include="obj\Release\netcoreapp3.1\Razor\Views\Device\UserCodeConfirmation.cshtml.g.cs" />
+    <Compile Include="obj\Release\netcoreapp3.1\Razor\Views\Diagnostics\Index.cshtml.g.cs" />
+    <Compile Include="obj\Release\netcoreapp3.1\Razor\Views\Grants\Index.cshtml.g.cs" />
+    <Compile Include="obj\Release\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs" />
+    <Compile Include="obj\Release\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs" />
+    <Compile Include="obj\Release\netcoreapp3.1\Razor\Views\Shared\Redirect.cshtml.g.cs" />
+    <Compile Include="obj\Release\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs" />
+    <Compile Include="obj\Release\netcoreapp3.1\Razor\Views\Shared\_Nav.cshtml.g.cs" />
+    <Compile Include="obj\Release\netcoreapp3.1\Razor\Views\Shared\_ScopeListItem.cshtml.g.cs" />
+    <Compile Include="obj\Release\netcoreapp3.1\Razor\Views\Shared\_ValidationSummary.cshtml.g.cs" />
+    <Compile Include="obj\Release\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs" />
+    <Compile Include="obj\Release\netcoreapp3.1\Razor\Views\_ViewStart.cshtml.g.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="obj\Debug\netcoreapp3.1\JWA.Auth.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\netcoreapp3.1\staticwebassets\JWA.Auth.StaticWebAssets.xml" />
+    <Content Include="obj\JWA.Auth.csproj.nuget.dgspec.json" />
+    <Content Include="obj\project.assets.json" />
+    <Content Include="obj\Release\netcoreapp3.1\JWA.Auth.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Release\netcoreapp3.1\staticwebassets\JWA.Auth.StaticWebAssets.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="obj\Debug\netcoreapp3.1\apphost.exe" />
+    <None Include="obj\Debug\netcoreapp3.1\JWA.Auth.AssemblyInfoInputs.cache" />
+    <None Include="obj\Debug\netcoreapp3.1\JWA.Auth.assets.cache" />
+    <None Include="obj\Debug\netcoreapp3.1\JWA.Auth.csproj.CopyComplete" />
+    <None Include="obj\Debug\netcoreapp3.1\JWA.Auth.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\netcoreapp3.1\JWA.Auth.csprojAssemblyReference.cache" />
+    <None Include="obj\Debug\netcoreapp3.1\JWA.Auth.dll" />
+    <None Include="obj\Debug\netcoreapp3.1\JWA.Auth.exe" />
+    <None Include="obj\Debug\netcoreapp3.1\JWA.Auth.genruntimeconfig.cache" />
+    <None Include="obj\Debug\netcoreapp3.1\JWA.Auth.MvcApplicationPartsAssemblyInfo.cache" />
+    <None Include="obj\Debug\netcoreapp3.1\JWA.Auth.pdb" />
+    <None Include="obj\Debug\netcoreapp3.1\JWA.Auth.RazorAssemblyInfo.cache" />
+    <None Include="obj\Debug\netcoreapp3.1\JWA.Auth.RazorCoreGenerate.cache" />
+    <None Include="obj\Debug\netcoreapp3.1\JWA.Auth.RazorTargetAssemblyInfo.cache" />
+    <None Include="obj\Debug\netcoreapp3.1\JWA.Auth.TagHelpers.input.cache" />
+    <None Include="obj\Debug\netcoreapp3.1\JWA.Auth.TagHelpers.output.cache" />
+    <None Include="obj\Debug\netcoreapp3.1\JWA.Auth.Views.dll" />
+    <None Include="obj\Debug\netcoreapp3.1\JWA.Auth.Views.pdb" />
+    <None Include="obj\Debug\netcoreapp3.1\staticwebassets\JWA.Auth.StaticWebAssets.Manifest.cache" />
+    <None Include="obj\JWA.Auth.csproj.nuget.g.props" />
+    <None Include="obj\JWA.Auth.csproj.nuget.g.targets" />
+    <None Include="obj\project.nuget.cache" />
+    <None Include="obj\Release\netcoreapp3.1\JWA.Auth.AssemblyInfoInputs.cache" />
+    <None Include="obj\Release\netcoreapp3.1\JWA.Auth.assets.cache" />
+    <None Include="obj\Release\netcoreapp3.1\JWA.Auth.csproj.CopyComplete" />
+    <None Include="obj\Release\netcoreapp3.1\JWA.Auth.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Release\netcoreapp3.1\JWA.Auth.csprojAssemblyReference.cache" />
+    <None Include="obj\Release\netcoreapp3.1\JWA.Auth.dll" />
+    <None Include="obj\Release\netcoreapp3.1\JWA.Auth.exe" />
+    <None Include="obj\Release\netcoreapp3.1\JWA.Auth.genruntimeconfig.cache" />
+    <None Include="obj\Release\netcoreapp3.1\JWA.Auth.MvcApplicationPartsAssemblyInfo.cache" />
+    <None Include="obj\Release\netcoreapp3.1\JWA.Auth.pdb" />
+    <None Include="obj\Release\netcoreapp3.1\JWA.Auth.RazorAssemblyInfo.cache" />
+    <None Include="obj\Release\netcoreapp3.1\JWA.Auth.RazorCoreGenerate.cache" />
+    <None Include="obj\Release\netcoreapp3.1\JWA.Auth.RazorTargetAssemblyInfo.cache" />
+    <None Include="obj\Release\netcoreapp3.1\JWA.Auth.TagHelpers.input.cache" />
+    <None Include="obj\Release\netcoreapp3.1\JWA.Auth.TagHelpers.output.cache" />
+    <None Include="obj\Release\netcoreapp3.1\JWA.Auth.Views.dll" />
+    <None Include="obj\Release\netcoreapp3.1\JWA.Auth.Views.pdb" />
+    <None Include="obj\Release\netcoreapp3.1\staticwebassets\JWA.Auth.StaticWebAssets.Manifest.cache" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="IdentityServer4" Version="4.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.0" />
   </ItemGroup>

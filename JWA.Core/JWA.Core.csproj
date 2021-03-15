@@ -5,12 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="bin\**" />
     <Compile Remove="Entities\IdentityEntities\**" />
     <Compile Remove="Enumerations\**" />
+    <Compile Remove="obj\**" />
+    <EmbeddedResource Remove="bin\**" />
     <EmbeddedResource Remove="Entities\IdentityEntities\**" />
     <EmbeddedResource Remove="Enumerations\**" />
+    <EmbeddedResource Remove="obj\**" />
+    <None Remove="bin\**" />
     <None Remove="Entities\IdentityEntities\**" />
     <None Remove="Enumerations\**" />
+    <None Remove="obj\**" />
   </ItemGroup>
 
   <ItemGroup>

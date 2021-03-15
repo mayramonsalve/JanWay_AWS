@@ -22,18 +22,32 @@ C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Identi
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\MicroElements.Swashbuckle.FluentValidation.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Microsoft.AspNet.Identity.Core.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Microsoft.AspNet.Identity.EntityFramework.dll
+<<<<<<< Updated upstream
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Google.dll
+=======
+>>>>>>> Stashed changes
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+<<<<<<< Updated upstream
+=======
+C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Microsoft.Bcl.HashCode.dll
+>>>>>>> Stashed changes
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Microsoft.DotNet.PlatformAbstractions.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Microsoft.Extensions.Caching.Memory.dll
+<<<<<<< Updated upstream
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+=======
+C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
+C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll
+>>>>>>> Stashed changes
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
@@ -47,17 +61,24 @@ C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Micros
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Microsoft.OpenApi.dll
+<<<<<<< Updated upstream
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Microsoft.Win32.SystemEvents.dll
+=======
+>>>>>>> Stashed changes
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Newtonsoft.Json.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Npgsql.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+<<<<<<< Updated upstream
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\SendGrid.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\StarkbankEcdsa.dll
+=======
+>>>>>>> Stashed changes
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\System.Collections.Immutable.dll
+<<<<<<< Updated upstream
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\System.Drawing.Common.dll
@@ -75,6 +96,10 @@ C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\runtim
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+=======
+C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+>>>>>>> Stashed changes
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\JWA.Core.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\JWA.Infrastructure.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\JWA.Core.pdb
@@ -118,4 +143,7 @@ C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\obj\Release\netcoreapp3.1\static
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\obj\Release\netcoreapp3.1\JWA.Auth.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\obj\Release\netcoreapp3.1\JWA.Auth.pdb
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\obj\Release\netcoreapp3.1\JWA.Auth.genruntimeconfig.cache
+<<<<<<< Updated upstream
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Auth\bin\Release\netcoreapp3.1\System.ComponentModel.Annotations.dll
+=======
+>>>>>>> Stashed changes

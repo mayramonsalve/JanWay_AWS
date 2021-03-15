@@ -91,6 +91,10 @@ C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\Prop
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\JWA.Auth.Views.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\JWA.Auth.Views.pdb
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\appsettings.json
+C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\appsettings.json
+C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\Properties\launchSettings.json
+C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\JWA.Auth.Views.dll
+C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\JWA.Auth.Views.pdb
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\JWA.Auth.exe
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\JWA.Api.StaticWebAssets.xml
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\JWA.Api.exe
@@ -118,6 +122,8 @@ C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\Micr
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\Microsoft.Bcl.HashCode.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\Microsoft.DotNet.PlatformAbstractions.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
@@ -126,6 +132,9 @@ C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\Micr
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\Microsoft.Extensions.Caching.Memory.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
+C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
@@ -179,6 +188,8 @@ C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\runt
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\JWA.Auth.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\JWA.Core.dll
 C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server\bin\Release\netcoreapp3.1\JWA.Infrastructure.dll

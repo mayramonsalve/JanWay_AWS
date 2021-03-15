@@ -3,8 +3,13 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
+<<<<<<< Updated upstream
       "applicationUrl": "https://localhost:44346/",
       "sslPort": 44346
+=======
+      "applicationUrl": "http://localhost:5001",
+      "sslPort": 44375
+>>>>>>> Stashed changes
     }
   },
   "$schema": "http://json.schemastore.org/launchsettings.json",
