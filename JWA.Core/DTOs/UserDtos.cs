@@ -56,4 +56,21 @@ namespace JWA.Core.DTOs
         public string Password { get; set; }
     }
 
+    public class UsersListDto
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Role { get; set; }
+        public string Email { get; set; }
+        public string Status { get; set; }
+    }
+
+    public class UserInfoDto
+    {
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public Guid RoleId { get; set; }
+        public int? FacilityId { get; set; }
+        public int? OrganizationId { get; set; }
+    }
 }

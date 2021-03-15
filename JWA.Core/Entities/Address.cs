@@ -11,7 +11,7 @@ namespace JWA.Core.Entities
             Organizations = new HashSet<Organization>();
         }
 
-        public string Street { get; set; }
+        public string Description { get; set; }
         public string City { get; set; }
         public int StateId { get; set; }
         public string ZipCode { get; set; }

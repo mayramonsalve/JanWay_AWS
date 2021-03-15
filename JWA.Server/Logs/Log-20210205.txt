@@ -1,0 +1,131 @@
+2021-02-05T18:09:33.0572803-04:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-02-05T18:09:33.0708416-04:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-02-05T18:09:33.0737457-04:00  [INF] Content root path: "C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server" (b5d60022)
+2021-02-05T18:10:24.6273406-04:00 80000002-0000-f500-b63f-84710c7967bb [ERR] An error occurred using the connection to database '"jw-app-db"' on server '"tcp://janway-instance-1.cz8mfiyblhpw.us-east-1.rds.amazonaws.com:5432"'. (5fc3407c)
+2021-02-05T18:10:24.7990938-04:00 80000002-0000-f500-b63f-84710c7967bb [ERR] An exception occurred while iterating over the results of a query for context type '"JWA.Infrastructure.Data.JWAContext"'."
+""System.InvalidOperationException: An exception has been raised that is likely due to a transient failure.
+ ---> System.TimeoutException: The operation has timed out.
+   at Npgsql.PostgresDatabaseInfo.LoadBackendTypes(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async)
+   at Npgsql.PostgresDatabaseInfo.LoadPostgresInfo(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async)
+   at Npgsql.PostgresDatabaseInfoFactory.Load(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async)
+   at Npgsql.NpgsqlDatabaseInfo.Load(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async)
+   at Npgsql.NpgsqlConnector.LoadDatabaseInfo(NpgsqlTimeout timeout, Boolean async)
+   at Npgsql.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.ConnectorPool.AllocateLong(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<>c__DisplayClass32_0.<<Open>g__OpenLong|0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenDbConnectionAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenDbConnectionAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(DbContext _, Boolean result, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()" (f5c7ac34)
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure.
+ ---> System.TimeoutException: The operation has timed out.
+   at Npgsql.PostgresDatabaseInfo.LoadBackendTypes(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async)
+   at Npgsql.PostgresDatabaseInfo.LoadPostgresInfo(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async)
+   at Npgsql.PostgresDatabaseInfoFactory.Load(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async)
+   at Npgsql.NpgsqlDatabaseInfo.Load(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async)
+   at Npgsql.NpgsqlConnector.LoadDatabaseInfo(NpgsqlTimeout timeout, Boolean async)
+   at Npgsql.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.ConnectorPool.AllocateLong(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<>c__DisplayClass32_0.<<Open>g__OpenLong|0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenDbConnectionAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenDbConnectionAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(DbContext _, Boolean result, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2021-02-05T18:12:26.3180659-04:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-02-05T18:12:26.3293974-04:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-02-05T18:12:26.3319060-04:00  [INF] Content root path: "C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server" (b5d60022)
+2021-02-05T18:13:04.6877891-04:00 80000005-0001-ff00-b63f-84710c7967bb [ERR] An error occurred using the connection to database '"jw-app-db"' on server '"tcp://janway-instance-1.cz8mfiyblhpw.us-east-1.rds.amazonaws.com:5432"'. (5fc3407c)
+2021-02-05T18:13:04.7682735-04:00 80000005-0001-ff00-b63f-84710c7967bb [ERR] An exception occurred while iterating over the results of a query for context type '"JWA.Infrastructure.Data.JWAContext"'."
+""System.InvalidOperationException: An exception has been raised that is likely due to a transient failure.
+ ---> System.TimeoutException: The operation has timed out.
+   at Npgsql.PostgresDatabaseInfo.LoadBackendTypes(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async)
+   at Npgsql.PostgresDatabaseInfo.LoadPostgresInfo(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async)
+   at Npgsql.PostgresDatabaseInfoFactory.Load(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async)
+   at Npgsql.NpgsqlDatabaseInfo.Load(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async)
+   at Npgsql.NpgsqlConnector.LoadDatabaseInfo(NpgsqlTimeout timeout, Boolean async)
+   at Npgsql.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.ConnectorPool.AllocateLong(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<>c__DisplayClass32_0.<<Open>g__OpenLong|0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenDbConnectionAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenDbConnectionAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(DbContext _, Boolean result, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()" (f5c7ac34)
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure.
+ ---> System.TimeoutException: The operation has timed out.
+   at Npgsql.PostgresDatabaseInfo.LoadBackendTypes(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async)
+   at Npgsql.PostgresDatabaseInfo.LoadPostgresInfo(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async)
+   at Npgsql.PostgresDatabaseInfoFactory.Load(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async)
+   at Npgsql.NpgsqlDatabaseInfo.Load(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async)
+   at Npgsql.NpgsqlConnector.LoadDatabaseInfo(NpgsqlTimeout timeout, Boolean async)
+   at Npgsql.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.ConnectorPool.AllocateLong(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<>c__DisplayClass32_0.<<Open>g__OpenLong|0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenDbConnectionAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenDbConnectionAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(DbContext _, Boolean result, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at JWA.Infrastructure.Repositories.UnitRepository.GetByMacAddress(String macAddress) in C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Infrastructure\Repositories\UnitRepository.cs:line 19
+2021-02-05T18:15:07.3313068-04:00 80000006-0001-ff00-b63f-84710c7967bb [ERR] Failed executing DbCommand ("295"ms) [Parameters=["@p0='?' (DbType = Int32), @p1='?' (DbType = DateTime), @p2='?' (DbType = DateTime), @p3='?' (DbType = Int32), @p4='?' (DbType = Int32), @p5='?' (DbType = Double), @p6='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO systemstatus (battery_level, creation_date, date, health, performance, selenoid_temperature, unit_id)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6)
+RETURNING id;" (627a98df)
+2021-02-05T18:17:59.7582180-04:00 80000006-0001-ff00-b63f-84710c7967bb [ERR] Connection ID ""18374686485577203716"", Request ID ""80000006-0001-ff00-b63f-84710c7967bb"": An unhandled exception was thrown by the application. (bf316047)
+Npgsql.NpgsqlException (0x80004005): Exception while reading from stream
+ ---> System.IO.IOException: Unable to read data from the transport connection: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond..
+ ---> System.Net.Sockets.SocketException (10060): A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+   at System.Net.Sockets.NetworkStream.Read(Byte[] buffer, Int32 offset, Int32 size)
+   --- End of inner exception stack trace ---
+   at System.Net.Sockets.NetworkStream.Read(Byte[] buffer, Int32 offset, Int32 size)
+   at Npgsql.NpgsqlReadBuffer.<>c__DisplayClass34_0.<<Ensure>g__EnsureLong|0>d.MoveNext()
+   at Npgsql.NpgsqlReadBuffer.<>c__DisplayClass34_0.<<Ensure>g__EnsureLong|0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at Npgsql.NpgsqlConnector.<>c__DisplayClass160_0.<<DoReadMessage>g__ReadMessageLong|0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming)
+   at Npgsql.NpgsqlDataReader.Consume(Boolean async)
+   at Npgsql.NpgsqlDataReader.Close(Boolean connectionClosing, Boolean async)
+   at Npgsql.NpgsqlConnector.CloseOngoingOperations(Boolean async)
+   at Npgsql.NpgsqlTransaction.Dispose(Boolean disposing)
+   at System.Data.Common.DbTransaction.Dispose()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalTransaction.Dispose()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.Dispose()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.Dispose()
+   at Microsoft.EntityFrameworkCore.DbContext.Dispose()
+   at JWA.Infrastructure.Repositories.UnitOfWork.Dispose() in C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Infrastructure\Repositories\UnitOfWork.cs:line 58
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.DisposeAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.FireOnCompleted()
+2021-02-05T20:59:35.8822395-04:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-02-05T20:59:35.8928773-04:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-02-05T20:59:35.8953065-04:00  [INF] Content root path: "C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server" (b5d60022)
+2021-02-05T21:01:39.1555434-04:00 80000006-0002-f900-b63f-84710c7967bb [ERR] Failed executing DbCommand ("118"ms) [Parameters=["@p0='?' (DbType = Int32), @p1='?' (DbType = DateTime), @p2='?' (DbType = DateTime), @p3='?' (DbType = Int32), @p4='?' (DbType = Int32), @p5='?' (DbType = Double), @p6='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO systemstatus (battery_level, creation_date, date, health, performance, selenoid_temperature, unit_id)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6)
+RETURNING id;" (627a98df)

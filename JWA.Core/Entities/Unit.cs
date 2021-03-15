@@ -8,6 +8,7 @@ namespace JWA.Core.Entities
         public Unit()
         {
             Flushes = new HashSet<Flush>();
+            SystemStatus = new HashSet<SystemStatus>();
         }
 
         public int Suin { get; set; }
@@ -21,5 +22,6 @@ namespace JWA.Core.Entities
 
         public virtual Facility Facility { get; set; }
         public virtual ICollection<Flush> Flushes { get; set; }
+        public virtual ICollection<SystemStatus> SystemStatus { get; set; }
     }
 }

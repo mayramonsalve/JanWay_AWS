@@ -11,6 +11,7 @@ namespace JWA.Core.Interfaces
         IEnumerable<T> GetAll();
         Task<T> GetById(int id);
         Task Insert(T entity);
+        Task InsertRange(IEnumerable<T> entities);
         void Update(T entity);
         Task Delete(int id);
     }

@@ -8,6 +8,7 @@ using JWA.Core.QueryFilters;
 using JWA.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
@@ -21,88 +22,202 @@ namespace JWA.Api.Controllers
     [ApiController]
     public class OrganizationsController : ControllerBase
     {
-        private readonly ISupervisorService _supervisorService;
+        private readonly IOrganizationService _organizationService;
+        private readonly IAddressService _addressService;
+        private readonly IFacilityService _facilityService;
+        private readonly IInviteService _inviteService;
+        private readonly IUnitService _unitService;
         private readonly IMapper _mapper;
         private readonly IUriService _uriService;
         private readonly IPasswordService _passwordService;
-        public OrganizationsController(ISupervisorService supervisorService, IMapper mapper, IUriService uriService, IPasswordService passwordService)
+        public OrganizationsController(IOrganizationService organizationService, IAddressService addressService,
+                                        IFacilityService facilityService, IInviteService inviteService, IUnitService unitService,
+                                        IMapper mapper, IUriService uriService, IPasswordService passwordService)
         {
-            _supervisorService = supervisorService;
+            _organizationService = organizationService;
+            _addressService = addressService;
+            _facilityService = facilityService;
+            _inviteService = inviteService;
+            _unitService = unitService;
             _mapper = mapper;
             _uriService = uriService;
             _passwordService = passwordService;
         }
 
-        ///// <summary>
-        ///// Retrieve all supervisors depending on supervisor role and organization.
-        ///// </summary>
-        ///// <param name="filters">Filters to apply</param>
-        ///// <returns></returns>
-        //[HttpGet(Name = "[controller][action]")]
-        //[ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<IEnumerable<SupervisorDto>>))]
-        //[ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        //public IActionResult GetAll([FromQuery]SupervisorQueryFilter filters)
-        //{
-        //    var supervisors = _supervisorService.GetSupervisors(filters);
-        //    var supervisorsDto = _mapper.Map<IEnumerable<SupervisorDto>>(supervisors);
+        /// <summary>
+        /// Setup an organization.
+        /// </summary>
+        /// <param name="setupOrganizationDto">Organization information</param>
+        /// <returns></returns>
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<IActionResult> SetupOrganization(SetupOrganizationDto setupOrganizationDto)
+        {
+            //#MISSING: ADD ORGANIZATIONID TO ORGANIZATION DEPENDING ON USER LOGGED
+            //ASSIGN DATA AND THEN VALIDATE THE WHOLE OBJECT
+            try
+            {
+                string message;
+                bool organizationExists = await _organizationService.ExistsOrganization(setupOrganizationDto.Organization.Name);
+                if (!organizationExists)
+                {
+                    var address = _mapper.Map<Address>(setupOrganizationDto.Address);
+                    var addressId = await _addressService.InsertAddress(address);
 
-        //    var metadata = new Metadata
-        //    {
-        //        TotalCount = supervisors.TotalCount,
-        //        PageSize = supervisors.PageSize,
-        //        CurrentPage = supervisors.CurrentPage,
-        //        TotalPages = supervisors.TotalPages,
-        //        HasNextPage = supervisors.HasNextPage,
-        //        HasPreviousPage = supervisors.HasPreviousPage,
-        //        NextPageUrl = _uriService.GetPaginationUri(Url.RouteUrl(nameof(GetAll))).ToString(),
-        //        PreviousPageUrl = _uriService.GetPaginationUri(Url.RouteUrl(nameof(GetAll))).ToString()
-        //    };
+                    var organization = _mapper.Map<Organization>(setupOrganizationDto.Organization);
+                    organization.AddressId = addressId;
+                    var organizationId = await _organizationService.InsertOrganization(organization);
 
-        //    var response = new ApiResponse<IEnumerable<SupervisorDto>>(supervisorsDto)
-        //    {
-        //        Meta = metadata
-        //    };
+                    var facilities = _mapper.Map<List<Facility>>(setupOrganizationDto.Facilities);
+                    facilities.ForEach(e => e.OrganizationId = organizationId);
+                    var facilitiesIdDic = await _facilityService.InsertFacilitiesRange(facilities);
 
-        //    return Ok(response);
-        //}
+                    var invites = _mapper.Map<List<Invite>>(setupOrganizationDto.Users);
+                    invites.ForEach(e => e.OrganizationId = organizationId);
+                    await _inviteService.InsertInvitesRange(invites);
 
-        ///// <summary>
-        ///// Retrieve supervisor information.
-        ///// </summary>
-        ///// <param name="id">Supervisor id</param>
-        ///// <returns></returns>
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> Get(int id)
-        //{
-        //    var supervisor = await _supervisorService.GetSupervisor(id);
-        //    var supervisorDto = _mapper.Map<SupervisorDto>(supervisor);
-        //    var response = new ApiResponse<SupervisorDto>(supervisorDto);
-        //    return Ok(response);
-        //}
+                    setupOrganizationDto.Units.ForEach(e => e.FacilityId = facilitiesIdDic[e.Facility]);
+                    var units = _mapper.Map<List<Unit>>(setupOrganizationDto.Units);
+                    await _unitService.InsertUnitsRange(units);
+
+                    message = "The organization has been registered.";
+                    var response = new DeviceApiResponse<bool>(message);
+                    return Ok(response);
+                }
+                else
+                {
+                    message = "The Organization name already exists in the Organization.";
+                    var response = new DeviceApiResponse<bool>(message);
+                    return BadRequest(response);
+                }
+            }
+            catch (Exception ex)
+            {
+                string message = "ERROR";
+                var response = new ApiResponse<Exception>(ex, message);
+                return StatusCode(500, response);
+            }
+        }
 
         /// <summary>
-        /// Relocate supervisor to another facility.
+        /// Update organization information.
         /// </summary>
-        /// <param name="relocateDto">Relocation information</param>
+        /// <param name="editOrganizationDto">Organization information</param>
         /// <returns></returns>
+        [Route("[action]")]
         [HttpPut]
-        public async Task<IActionResult> Relocate(RelocateDto relocateDto)
+        public async Task<IActionResult> EditOrganization(EditOrganizationDto editOrganizationDto)
         {
-            var supervisor = _mapper.Map<Supervisor>(relocateDto);
-
-            var result = await _supervisorService.UpdateSupervisor(supervisor);
+            var organization = _mapper.Map<Organization>(editOrganizationDto.Organization);
+            var address = _mapper.Map<Address>(editOrganizationDto.Address);
+            //#MISSING: VALIDATE THAT USER LOGGED BELONGS TO ORGANIZATION
+            var result = await _organizationService.UpdateOrganization(organization, address);
             var response = new ApiResponse<bool>(result);
             return Ok(response);
         }
 
-        [HttpGet]
-        public List<string> GetTest()
+        /// <summary>
+        /// Delete organization from organization.
+        /// </summary>
+        /// <param name="deleteOrganizationDto">Organization id</param>
+        /// <returns></returns>
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<IActionResult> DeleteOrganization(DeleteOrganizationDto deleteOrganizationDto)
         {
-            return new List<string>() {
-            "Nancy Davolio",
-            "Andrew Fuller",
-            "Janet Leverling"
-        };
+            //#MISSING: VALIDATE THAT USSER LOGGED BELONGS TO USER ORGANIZATION
+            var result = await _organizationService.DeleteOrganization(deleteOrganizationDto.Id);
+            var response = new ApiResponse<bool>(result);
+            return Ok(response);
         }
+
+        /// <summary>
+        /// Deactivate organization.
+        /// </summary>
+        /// <param name="deactivateOrganizationDto">Organization id</param>
+        /// <returns></returns>
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<IActionResult> DeactivateOrganization(DeactivateOrganizationDto deactivateOrganizationDto)
+        {
+            //#MISSING: VALIDATE THAT USSER LOGGED BELONGS TO USER ORGANIZATION
+            var result = await _organizationService.DeactivateOrganization(deactivateOrganizationDto.Id);
+            var response = new ApiResponse<bool>(result);
+            return Ok(response);
+        }
+
+        /// <summary>
+        /// Activate organization.
+        /// </summary>
+        /// <param name="activateOrganizationDto">Organization id</param>
+        /// <returns></returns>
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<IActionResult> ActivateOrganization(ActivateOrganizationDto activateOrganizationDto)
+        {
+            //#MISSING: VALIDATE THAT USSER LOGGED BELONGS TO USER ORGANIZATION
+            var result = await _organizationService.ActivateOrganization(activateOrganizationDto.Id);
+            var response = new ApiResponse<bool>(result);
+            return Ok(response);
+        }
+
+        /// <summary>
+        /// Retrieve all organizations.
+        /// </summary>
+        /// <param name="filters">Filters to apply</param>
+        /// <returns></returns>
+        [Route("[action]")]
+        [HttpGet]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<IEnumerable<OrganizationsListDto>>))]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public IActionResult GetAll([FromQuery] OrganizationQueryFilter filters)
+        {
+            // GET ORGANIZATIONS DEPENDING ON USER LOGGED
+            var organizations = _organizationService.GetOrganizations(filters);
+            var organizationsDto = _mapper.Map<IEnumerable<OrganizationsListDto>>(organizations);
+
+            var metadata = new Metadata
+            {
+                TotalCount = organizations.TotalCount,
+                PageSize = organizations.PageSize,
+                CurrentPage = organizations.CurrentPage,
+                TotalPages = organizations.TotalPages,
+                HasNextPage = organizations.HasNextPage,
+                HasPreviousPage = organizations.HasPreviousPage,
+                NextPageUrl = _uriService.GetPaginationUri(Url.RouteUrl(nameof(GetAll))).ToString(),
+                PreviousPageUrl = _uriService.GetPaginationUri(Url.RouteUrl(nameof(GetAll))).ToString()
+            };
+
+            var response = new ApiResponse<IEnumerable<OrganizationsListDto>>(organizationsDto)
+            {
+                Meta = metadata
+            };
+
+            return Ok(response);
+        }
+
+        /// <summary>
+        /// Retrieve organization profile information.
+        /// </summary>
+        /// <param name="id">Organization id</param>
+        /// <returns></returns>
+        [Route("[action]")]
+        [HttpGet]
+        public async Task<IActionResult> GetOrganizationProfile(int id)
+        {
+            //#MISSING: VALIDATE THAT USER LOGGED BELONGS TO ORGANIZATION
+            var organization = await _organizationService.GetOrganization(id);
+
+            var organizationInfoDto = _mapper.Map<OrganizationInfoDto>(organization);
+            var addressInfoDto = _mapper.Map<AddressInfoDto>(organization.Address);
+            
+            var organizationProfile = _mapper.Map<OrganizationProfileDto>(organization);
+            organizationProfile.Organization = organizationInfoDto;
+            organizationProfile.Address = addressInfoDto;
+            
+            var response = new ApiResponse<OrganizationProfileDto>(organizationProfile);
+            return Ok(response);
+        }
+
     }
 }

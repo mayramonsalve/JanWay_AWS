@@ -23,6 +23,7 @@ namespace JWA.Infrastructure.Data
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<State> States { get; set; }
         public virtual DbSet<Supervisor> Supervisors { get; set; }
+        public virtual DbSet<SystemStatus> SystemStatus { get; set; }
         public virtual DbSet<Unit> Units { get; set; }
         public virtual DbSet<UserClaim> UserClaims { get; set; }
         public virtual DbSet<UserLogin> UserLogins { get; set; }

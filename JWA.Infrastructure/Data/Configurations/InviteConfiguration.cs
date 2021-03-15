@@ -30,16 +30,15 @@ namespace JWA.Infrastructure.Data.Configurations
             builder.Property(e => e.RoleId).HasColumnName("role_id");
 
             builder.HasOne(d => d.Facility)
-                .WithMany(p => p.Invites)
-                .HasForeignKey(d => d.FacilityId)
-                .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("invites_facility_id_fkey");
-
+                    .WithMany(p => p.Invites)
+                    .HasForeignKey(d => d.FacilityId)
+                    .HasConstraintName("facility_fk");
+            
             builder.HasOne(d => d.Organization)
                 .WithMany(p => p.Invites)
                 .HasForeignKey(d => d.OrganizationId)
                 .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("invites_organization_id_fkey");
+                .HasConstraintName("organization_fk");
 
             /*builder.HasOne(d => d.Role)
                 .WithMany(p => p.Invites)

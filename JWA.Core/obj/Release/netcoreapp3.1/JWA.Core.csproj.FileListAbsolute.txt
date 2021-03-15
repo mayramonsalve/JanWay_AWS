@@ -7,3 +7,12 @@ C:\Users\Mayra\Source\Repos\JWA.Server\JWA.Core\obj\Release\netcoreapp3.1\JWA.Co
 C:\Users\Mayra\Source\Repos\JWA.Server\JWA.Core\obj\Release\netcoreapp3.1\JWA.Core.csproj.CoreCompileInputs.cache
 C:\Users\Mayra\Source\Repos\JWA.Server\JWA.Core\obj\Release\netcoreapp3.1\JWA.Core.dll
 C:\Users\Mayra\Source\Repos\JWA.Server\JWA.Core\obj\Release\netcoreapp3.1\JWA.Core.pdb
+C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Core\bin\Release\netcoreapp3.1\JWA.Core.deps.json
+C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Core\bin\Release\netcoreapp3.1\JWA.Core.dll
+C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Core\bin\Release\netcoreapp3.1\JWA.Core.pdb
+C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Core\obj\Release\netcoreapp3.1\JWA.Core.csprojAssemblyReference.cache
+C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Core\obj\Release\netcoreapp3.1\JWA.Core.AssemblyInfoInputs.cache
+C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Core\obj\Release\netcoreapp3.1\JWA.Core.AssemblyInfo.cs
+C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Core\obj\Release\netcoreapp3.1\JWA.Core.csproj.CoreCompileInputs.cache
+C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Core\obj\Release\netcoreapp3.1\JWA.Core.dll
+C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Core\obj\Release\netcoreapp3.1\JWA.Core.pdb

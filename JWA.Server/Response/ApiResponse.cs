@@ -12,7 +12,28 @@ namespace JWA.Api.Response
         {
             Data = data;
         }
+        public ApiResponse(T data, string message)
+        {
+            Data = data;
+            Message = message;
+        }
         public T Data { get; set; }
         public Metadata Meta { get; set; }
+        public string Message { get; set; }
+    }
+
+    public class DeviceApiResponse<T>
+    {
+        public DeviceApiResponse(string message)
+        {
+            Message = message;
+        }
+        public DeviceApiResponse(T data, string message)
+        {
+            Data = data;
+            Message = message;
+        }
+        public T Data { get; set; }
+        public string Message { get; set; }
     }
 }

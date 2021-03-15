@@ -14,10 +14,17 @@ namespace JWA.Infrastructure.Repositories
         public UnitRepository(JWAContext context) : base(context)
         { }
 
-        //public async Task<Unit> GetByEmail(string email)
-        //{
-        //    return await _entities.FirstOrDefaultAsync(e => e.Email.ToLower() == email.ToLower());
-        //}
-
+        public async Task<Unit> GetByMacAddress(string macAddress)
+        {
+            return await _entities.FirstOrDefaultAsync(e => e.MacAddress.ToLower() == macAddress.ToLower());
+        }
+        public async Task<Unit> GetBySuinNumber(int suin)
+        {
+            return await _entities.FirstOrDefaultAsync(e => e.Suin == suin);
+        }
+        public async Task<IEnumerable<Unit>> GetUnassignedUnits()
+        {
+            return await _entities.Where(e => !e.FacilityId.HasValue).ToListAsync();
+        }
     }
 }

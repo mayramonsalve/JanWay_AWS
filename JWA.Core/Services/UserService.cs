@@ -57,21 +57,21 @@ namespace JWA.Core.Services
             filters.PageNumber = filters.PageNumber == 0 ? _paginationOptions.DefaultPageNumber : filters.PageNumber;
             filters.PageSize = filters.PageSize == 0 ? _paginationOptions.DefaultPageSize : filters.PageSize;
 
-            var users = _unitOfWork.UserRepository.GetAll();
+            var users = _unitOfWork.UserRepository.GetAll().ToList();
 
             /*if (!String.IsNullOrEmpty(filters.Name))
             {
-                users = users.Where(x => x.Name.ToLower().Contains(filters.Name.ToLower()));
+                users = users.Where(x => x.Name.ToLower().Contains(filters.Name.ToLower())).ToList();
             }*/
 
             /*if (!String.IsNullOrEmpty(filters.Role))
             {
-                users = users.Where(x => x.Role.Name.ToLower().Contains(filters.Role.ToLower()));
+                users = users.Where(x => x.Role.Name.ToLower().Contains(filters.Role.ToLower())).ToList();
             }*/
 
             if (!String.IsNullOrEmpty(filters.Email))
             {
-                users = users.Where(x => x.Email.ToLower().Contains(filters.Email.ToLower()));
+                users = users.Where(x => x.Email.ToLower().Contains(filters.Email.ToLower())).ToList();
             }
 
             var pagedUsers = PagedList<User>.Create(users, filters.PageNumber, filters.PageSize);

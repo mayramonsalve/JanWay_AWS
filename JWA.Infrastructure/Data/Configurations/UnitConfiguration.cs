@@ -37,7 +37,7 @@ namespace JWA.Infrastructure.Data.Configurations
             builder.Property(e => e.IpAddress)
                 .IsRequired()
                 .HasColumnName("ip_address")
-                .HasMaxLength(20);
+                .HasMaxLength(30);
 
             builder.Property(e => e.IsActive).HasColumnName("is_active");
 

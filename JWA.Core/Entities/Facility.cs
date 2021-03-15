@@ -13,9 +13,10 @@ namespace JWA.Core.Entities
         }
 
         public string Name { get; set; }
+        public string PhoneNumber { get; set; }
         public bool IsActive { get; set; }
         public int OrganizationId { get; set; }
-        public int AddressId { get; set; }
+        public int? AddressId { get; set; }
         public DateTime CreationDate { get; set; }
 
         public virtual Address Address { get; set; }

@@ -25,6 +25,10 @@ namespace JWA.Infrastructure.Data.Configurations
                 .HasColumnName("name")
                 .HasMaxLength(50);
 
+            builder.Property(e => e.PhoneNumber)
+                .HasColumnName("phone_number")
+                .HasMaxLength(20);
+
             builder.HasOne(d => d.Address)
                 .WithMany(p => p.Organizations)
                 .HasForeignKey(d => d.AddressId)

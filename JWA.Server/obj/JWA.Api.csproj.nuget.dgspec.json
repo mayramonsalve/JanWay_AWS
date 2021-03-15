@@ -1,17 +1,92 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Mayra\\Source\\Repos\\JWA.Server\\JWA.Server\\JWA.Api.csproj": {}
+    "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Server\\JWA.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Mayra\\Source\\Repos\\JWA.Server\\JWA.Core\\JWA.Core.csproj": {
+    "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Auth\\JWA.Auth.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mayra\\Source\\Repos\\JWA.Server\\JWA.Core\\JWA.Core.csproj",
-        "projectName": "JWA.Core",
-        "projectPath": "C:\\Users\\Mayra\\Source\\Repos\\JWA.Server\\JWA.Core\\JWA.Core.csproj",
+        "projectUniqueName": "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Auth\\JWA.Auth.csproj",
+        "projectName": "JWA.Auth",
+        "projectPath": "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Auth\\JWA.Auth.csproj",
         "packagesPath": "C:\\Users\\Mayra\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mayra\\Source\\Repos\\JWA.Server\\JWA.Core\\obj\\",
+        "outputPath": "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Auth\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Mayra\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Core\\JWA.Core.csproj": {
+                "projectPath": "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Core\\JWA.Core.csproj"
+              },
+              "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Infrastructure\\JWA.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Infrastructure\\JWA.Infrastructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "IdentityServer4": {
+              "target": "Package",
+              "version": "[4.1.1, )"
+            },
+            "Microsoft.AspNetCore.Authentication.Google": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Core\\JWA.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Core\\JWA.Core.csproj",
+        "projectName": "JWA.Core",
+        "projectPath": "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Core\\JWA.Core.csproj",
+        "packagesPath": "C:\\Users\\Mayra\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -48,6 +123,14 @@
             "Microsoft.Extensions.Options": {
               "target": "Package",
               "version": "[3.1.8, )"
+            },
+            "SendGrid": {
+              "target": "Package",
+              "version": "[9.22.0, )"
+            },
+            "System.Configuration.ConfigurationManager": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             }
           },
           "imports": [
@@ -69,14 +152,14 @@
         }
       }
     },
-    "C:\\Users\\Mayra\\Source\\Repos\\JWA.Server\\JWA.Infrastructure\\JWA.Infrastructure.csproj": {
+    "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Infrastructure\\JWA.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mayra\\Source\\Repos\\JWA.Server\\JWA.Infrastructure\\JWA.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Infrastructure\\JWA.Infrastructure.csproj",
         "projectName": "JWA.Infrastructure",
-        "projectPath": "C:\\Users\\Mayra\\Source\\Repos\\JWA.Server\\JWA.Infrastructure\\JWA.Infrastructure.csproj",
+        "projectPath": "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Infrastructure\\JWA.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\Mayra\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mayra\\Source\\Repos\\JWA.Server\\JWA.Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -95,8 +178,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\Mayra\\Source\\Repos\\JWA.Server\\JWA.Core\\JWA.Core.csproj": {
-                "projectPath": "C:\\Users\\Mayra\\Source\\Repos\\JWA.Server\\JWA.Core\\JWA.Core.csproj"
+              "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Core\\JWA.Core.csproj": {
+                "projectPath": "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Core\\JWA.Core.csproj"
               }
             }
           }
@@ -138,6 +221,10 @@
               "target": "Package",
               "version": "[3.1.7, )"
             },
+            "Microsoft.EntityFrameworkCore.Proxies": {
+              "target": "Package",
+              "version": "[5.0.3, )"
+            },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
@@ -146,7 +233,7 @@
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
-              "version": "[3.1.4, )"
+              "version": "[5.0.2, )"
             },
             "Swashbuckle.AspNetCore.Swagger": {
               "target": "Package",
@@ -183,14 +270,14 @@
         }
       }
     },
-    "C:\\Users\\Mayra\\Source\\Repos\\JWA.Server\\JWA.Server\\JWA.Api.csproj": {
+    "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Server\\JWA.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mayra\\Source\\Repos\\JWA.Server\\JWA.Server\\JWA.Api.csproj",
+        "projectUniqueName": "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Server\\JWA.Api.csproj",
         "projectName": "JWA.Api",
-        "projectPath": "C:\\Users\\Mayra\\Source\\Repos\\JWA.Server\\JWA.Server\\JWA.Api.csproj",
+        "projectPath": "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Server\\JWA.Api.csproj",
         "packagesPath": "C:\\Users\\Mayra\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mayra\\Source\\Repos\\JWA.Server\\JWA.Server\\obj\\",
+        "outputPath": "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Server\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -209,11 +296,14 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\Mayra\\Source\\Repos\\JWA.Server\\JWA.Core\\JWA.Core.csproj": {
-                "projectPath": "C:\\Users\\Mayra\\Source\\Repos\\JWA.Server\\JWA.Core\\JWA.Core.csproj"
+              "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Auth\\JWA.Auth.csproj": {
+                "projectPath": "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Auth\\JWA.Auth.csproj"
               },
-              "C:\\Users\\Mayra\\Source\\Repos\\JWA.Server\\JWA.Infrastructure\\JWA.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\Mayra\\Source\\Repos\\JWA.Server\\JWA.Infrastructure\\JWA.Infrastructure.csproj"
+              "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Core\\JWA.Core.csproj": {
+                "projectPath": "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Core\\JWA.Core.csproj"
+              },
+              "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Infrastructure\\JWA.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Infrastructure\\JWA.Infrastructure.csproj"
               }
             }
           }
@@ -244,6 +334,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[3.1.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.Proxies": {
+              "target": "Package",
+              "version": "[5.0.3, )"
             },
             "Serilog.AspNetCore": {
               "target": "Package",

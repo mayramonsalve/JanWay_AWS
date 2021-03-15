@@ -36,6 +36,11 @@ namespace JWA.Infrastructure.Repositories
             await _entities.AddAsync(entity);
         }
 
+        public async Task InsertRange(IEnumerable<T> entities)
+        {
+            await _entities.AddRangeAsync(entities);
+        }
+
         public void Update(T entity)
         {
             _entities.Update(entity);

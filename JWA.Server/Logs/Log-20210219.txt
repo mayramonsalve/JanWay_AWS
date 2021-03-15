@@ -1,0 +1,10 @@
+2021-02-19T17:00:42.0346619-04:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-02-19T17:00:42.0498789-04:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-02-19T17:00:42.0527668-04:00  [INF] Content root path: "C:\Users\Mayra\Source\Repos\JanWay_AWS\JWA.Server" (b5d60022)
+2021-02-19T17:00:43.7092435-04:00 800000b9-0000-f600-b63f-84710c7967bb [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Ambiguous HTTP method for action - JWA.Api.Controllers.FacilitiesController.GetAll (JWA.Api). Actions require an explicit HttpMethod binding for Swagger/OpenAPI 3.0
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwagger(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)

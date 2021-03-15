@@ -6,12 +6,11 @@
 
   <ItemGroup>
     <Compile Remove="Entities\IdentityEntities\**" />
+    <Compile Remove="Enumerations\**" />
     <EmbeddedResource Remove="Entities\IdentityEntities\**" />
+    <EmbeddedResource Remove="Enumerations\**" />
     <None Remove="Entities\IdentityEntities\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Enumerations\" />
+    <None Remove="Enumerations\**" />
   </ItemGroup>
 
   <ItemGroup>

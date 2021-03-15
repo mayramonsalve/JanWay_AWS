@@ -7,15 +7,18 @@ namespace JWA.Core.Interfaces
     public interface IUnitOfWork : IDisposable
     {
         //All repositories of the app
-        IInviteRepository InviteRepository { get; }
+        IAddressRepository AddressRepository { get; }
         IFacilityRepository FacilityRepository { get; }
+        IFlushRepository FlushRepository { get; }
+        IInviteRepository InviteRepository { get; }
         IOrganizationRepository OrganizationRepository { get; }
-        IRoleRepository RoleRepository { get; } // When repository is the same as BaseRepository
+        IRoleRepository RoleRepository { get; }
         ISupervisorRepository SupervisorRepository { get; }
+        ISystemStatusRepository SystemStatusRepository { get; }
         IUnitRepository UnitRepository { get; }
         IUserRepository UserRepository { get; }
         void SaveChanges();
         Task SaveChangesAsync();
-        IUserRolesRepository UserRolesRepository { get; }
+        //IUserRolesRepository UserRolesRepository { get; }
     }
 }

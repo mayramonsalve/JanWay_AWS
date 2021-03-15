@@ -42,12 +42,12 @@ namespace JWA.Api.Controllers
         /// <param name="filters">Filters to apply</param>
         /// <returns></returns>
         [HttpGet(Name = "[controller][action]")]
-        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<IEnumerable<InviteDtos>>))]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<IEnumerable<InviteDto>>))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public IActionResult GetAll([FromQuery]InviteQueryFilter filters)
         {
             var invites = _inviteService.GetInvites(filters);
-            var invitesDto = _mapper.Map<IEnumerable<InviteDtos>>(invites);
+            var invitesDto = _mapper.Map<IEnumerable<InviteDto>>(invites);
 
             var metadata = new Metadata
             {
@@ -61,7 +61,7 @@ namespace JWA.Api.Controllers
                 PreviousPageUrl = _uriService.GetPaginationUri(Url.RouteUrl(nameof(GetAll))).ToString()
             };
 
-            var response = new ApiResponse<IEnumerable<InviteDtos>>(invitesDto)
+            var response = new ApiResponse<IEnumerable<InviteDto>>(invitesDto)
             {
                 Meta = metadata
             };
@@ -79,8 +79,8 @@ namespace JWA.Api.Controllers
         public async Task<IActionResult> Get(int id)
         {
             var invite = _inviteService.GetInvite(id);
-            var inviteDto = _mapper.Map<InviteDtos>(invite);
-            var response = new ApiResponse<InviteDtos>(inviteDto);
+            var inviteDto = _mapper.Map<InviteDto>(invite);
+            var response = new ApiResponse<InviteDto>(inviteDto);
             return Ok(response);
         }
 
@@ -91,16 +91,16 @@ namespace JWA.Api.Controllers
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> SendInvite(InviteDtos inviteDto)
+        public async Task<IActionResult> SendInvite(InviteDto inviteDto)
         {
             //Not able to send invite. Followed by errors.
             var invite = _mapper.Map<Invite>(inviteDto);
 
             await _inviteService.InsertInvite(invite, User);
             //SEND EMAIL
-            inviteDto = _mapper.Map<InviteDtos>(invite);
+            inviteDto = _mapper.Map<InviteDto>(invite);
 
-            var response = new ApiResponse<InviteDtos>(inviteDto);
+            var response = new ApiResponse<InviteDto>(inviteDto);
             return Ok(response);
         }
 

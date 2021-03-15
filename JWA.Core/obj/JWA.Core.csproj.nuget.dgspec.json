@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Mayra\\Source\\Repos\\JWA.Server\\JWA.Core\\JWA.Core.csproj": {}
+    "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Core\\JWA.Core.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Mayra\\Source\\Repos\\JWA.Server\\JWA.Core\\JWA.Core.csproj": {
+    "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Core\\JWA.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mayra\\Source\\Repos\\JWA.Server\\JWA.Core\\JWA.Core.csproj",
+        "projectUniqueName": "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Core\\JWA.Core.csproj",
         "projectName": "JWA.Core",
-        "projectPath": "C:\\Users\\Mayra\\Source\\Repos\\JWA.Server\\JWA.Core\\JWA.Core.csproj",
+        "projectPath": "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Core\\JWA.Core.csproj",
         "packagesPath": "C:\\Users\\Mayra\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mayra\\Source\\Repos\\JWA.Server\\JWA.Core\\obj\\",
+        "outputPath": "C:\\Users\\Mayra\\Source\\Repos\\JanWay_AWS\\JWA.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -48,6 +48,14 @@
             "Microsoft.Extensions.Options": {
               "target": "Package",
               "version": "[3.1.8, )"
+            },
+            "SendGrid": {
+              "target": "Package",
+              "version": "[9.22.0, )"
+            },
+            "System.Configuration.ConfigurationManager": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             }
           },
           "imports": [

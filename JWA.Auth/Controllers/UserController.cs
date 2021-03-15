@@ -28,17 +28,17 @@ namespace JWA.Auth.Controllers
         private readonly IInviteService _inviteservice;
         private readonly IOrganizationService _organizationService;
         private readonly ISendEmailService _sendEmailService;
-        private readonly IUserRolesService _userRolesService;
+        //private readonly IUserRolesService _userRolesService;
         public UserController(IUserService userService, IPasswordService passwordService,
                                 IInviteService inviteservice, IOrganizationService organizationService,
-                                ISendEmailService sendEmailService, IUserRolesService userRolesService)
+                                ISendEmailService sendEmailService)//, IUserRolesService userRolesService)
         {
             _userService = userService;
             _passwordService = passwordService;
             _inviteservice = inviteservice;
             _organizationService = organizationService;
             _sendEmailService = sendEmailService;
-            _userRolesService = userRolesService;
+            //_userRolesService = userRolesService;
         }
 
         [HttpPost]
@@ -79,7 +79,7 @@ namespace JWA.Auth.Controllers
                         UserRole userRole = new UserRole();
                         userRole.RoleId = invite.RoleId;
                         userRole.UserId = NewUserId;
-                        await _userRolesService.InsertRoleUser(userRole);
+                        //await _userRolesService.InsertRoleUser(userRole);
                         var invitedelete = _inviteservice.DeleteInvite(invite.Id);
                         return Ok(user);
                     }

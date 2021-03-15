@@ -14,10 +14,29 @@ namespace JWA.Infrastructure.Repositories
         public OrganizationRepository(JWAContext context) : base(context)
         { }
 
-        //public async Task<Organization> GetByEmail(string email)
+        public async Task<Organization> GetOrganizationByName(string name)
+        {
+            return await _entities.FirstOrDefaultAsync(e => e.Name.ToLower() == name.ToLower());
+        }
+
+        //public async Task<IEnumerable<Organization>> GetOrganizationsByOrganization(int organizationId)
         //{
-        //    return await _entities.FirstOrDefaultAsync(e => e.Email.ToLower() == email.ToLower());
+        //    return await _entities.Where(e => e.OrganizationId == organizationId).ToListAsync();
         //}
+
+        public async Task Activate(int id)
+        {
+            Organization entity = await GetById(id);
+            entity.IsActive = true;
+            _entities.Update(entity);
+        }
+
+        public async Task Deactivate(int id)
+        {
+            Organization entity = await GetById(id);
+            entity.IsActive = false;
+            _entities.Update(entity);
+        }
 
     }
 }

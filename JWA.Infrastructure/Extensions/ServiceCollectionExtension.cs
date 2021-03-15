@@ -44,8 +44,9 @@ namespace JWA.Infrastructure.Extensions
         public static IServiceCollection AddDbContexts(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<JWAContext>(options =>
-                options.UseNpgsql(configuration.GetConnectionString("JWA"))
+                options.UseLazyLoadingProxies().UseNpgsql(configuration.GetConnectionString("JWA"))
             );
+
             return services;
         }
 
@@ -54,20 +55,25 @@ namespace JWA.Infrastructure.Extensions
             //services.Configure<PaginationOptions>(options => configuration.GetSection("Pagination").Bind(options));
             services.Configure<PaginationOptions>(configuration.GetSection("Pagination"));
             services.Configure<PasswordOptions>(configuration.GetSection("PasswordOptions"));
+            services.Configure<BaseUrlOptions>(configuration.GetSection("BaseUrlOptions"));
             return services;
         }
 
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
+            services.AddTransient<IAddressService, AddressService>();
+            services.AddTransient<IFacilityService, FacilityService>();
+            services.AddTransient<IFlushService, FlushService>();
             services.AddTransient<IInviteService, InviteService>();
-            services.AddTransient<ISupervisorService, SupervisorService>();
-            services.AddTransient<IUserService, UserService>();
-            services.AddSingleton<IPasswordService, PasswordService>();
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IOrganizationService, OrganizationService>();
+            services.AddSingleton<IPasswordService, PasswordService>();
             services.AddTransient<ISendEmailService, SendEmailService>();
-            services.AddTransient<IUserRolesService, UserRolesService>();
+            services.AddTransient<ISupervisorService, SupervisorService>();
+            services.AddTransient<ISystemStatusService, SystemStatusService>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IUnitService, UnitService>();
+            services.AddTransient<IUserService, UserService>();
             services.AddSingleton<IUriService>(provider =>
             {
                 var accessor = provider.GetRequiredService<IHttpContextAccessor>();

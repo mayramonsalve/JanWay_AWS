@@ -4,11 +4,53 @@
         <name>JWA.Api</name>
     </assembly>
     <members>
-        <member name="M:JWA.Api.Controllers.FacilitiesController.Relocate(JWA.Core.DTOs.RelocateDto)">
+        <member name="M:JWA.Api.Controllers.FacilitiesController.AddFacility(JWA.Core.DTOs.AddFacilityDto)">
             <summary>
-            Relocate supervisor to another facility.
+            Add a facility.
             </summary>
-            <param name="relocateDto">Relocation information</param>
+            <param name="addFacilityDto">Facility information</param>
+            <returns></returns>
+        </member>
+        <member name="M:JWA.Api.Controllers.FacilitiesController.EditFacility(JWA.Core.DTOs.EditFacilityDto)">
+            <summary>
+            Update facility information.
+            </summary>
+            <param name="editFacilityDto">Facility information</param>
+            <returns></returns>
+        </member>
+        <member name="M:JWA.Api.Controllers.FacilitiesController.DeleteFacility(JWA.Core.DTOs.DeleteFacilityDto)">
+            <summary>
+            Delete facility from organization.
+            </summary>
+            <param name="deleteFacilityDto">Facility id</param>
+            <returns></returns>
+        </member>
+        <member name="M:JWA.Api.Controllers.FacilitiesController.DeactivateFacility(JWA.Core.DTOs.DeactivateFacilityDto)">
+            <summary>
+            Deactivate facility.
+            </summary>
+            <param name="deactivateFacilityDto">Facility id</param>
+            <returns></returns>
+        </member>
+        <member name="M:JWA.Api.Controllers.FacilitiesController.ActivateFacility(JWA.Core.DTOs.ActivateFacilityDto)">
+            <summary>
+            Activate facility.
+            </summary>
+            <param name="activateFacilityDto">Facility id</param>
+            <returns></returns>
+        </member>
+        <member name="M:JWA.Api.Controllers.FacilitiesController.GetAll(JWA.Core.QueryFilters.FacilityQueryFilter)">
+            <summary>
+            Retrieve all facilities.
+            </summary>
+            <param name="filters">Filters to apply</param>
+            <returns></returns>
+        </member>
+        <member name="M:JWA.Api.Controllers.FacilitiesController.GetFacilityProfile(System.Int32)">
+            <summary>
+            Retrieve facility profile information.
+            </summary>
+            <param name="id">Facility id</param>
             <returns></returns>
         </member>
         <member name="M:JWA.Api.Controllers.InvitesController.GetAll(JWA.Core.QueryFilters.InviteQueryFilter)">
@@ -25,7 +67,7 @@
             <param name="id">Invite id</param>
             <returns></returns>
         </member>
-        <member name="M:JWA.Api.Controllers.InvitesController.SendInvite(JWA.Core.DTOs.InviteDtos)">
+        <member name="M:JWA.Api.Controllers.InvitesController.SendInvite(JWA.Core.DTOs.InviteDto)">
             <summary>
             Send invite.
             </summary>
@@ -39,11 +81,53 @@
             <param name="id">Invite id</param>
             <returns></returns>
         </member>
-        <member name="M:JWA.Api.Controllers.OrganizationsController.Relocate(JWA.Core.DTOs.RelocateDto)">
+        <member name="M:JWA.Api.Controllers.OrganizationsController.SetupOrganization(JWA.Core.DTOs.SetupOrganizationDto)">
             <summary>
-            Relocate supervisor to another facility.
+            Setup an organization.
             </summary>
-            <param name="relocateDto">Relocation information</param>
+            <param name="setupOrganizationDto">Organization information</param>
+            <returns></returns>
+        </member>
+        <member name="M:JWA.Api.Controllers.OrganizationsController.EditOrganization(JWA.Core.DTOs.EditOrganizationDto)">
+            <summary>
+            Update organization information.
+            </summary>
+            <param name="editOrganizationDto">Organization information</param>
+            <returns></returns>
+        </member>
+        <member name="M:JWA.Api.Controllers.OrganizationsController.DeleteOrganization(JWA.Core.DTOs.DeleteOrganizationDto)">
+            <summary>
+            Delete organization from organization.
+            </summary>
+            <param name="deleteOrganizationDto">Organization id</param>
+            <returns></returns>
+        </member>
+        <member name="M:JWA.Api.Controllers.OrganizationsController.DeactivateOrganization(JWA.Core.DTOs.DeactivateOrganizationDto)">
+            <summary>
+            Deactivate organization.
+            </summary>
+            <param name="deactivateOrganizationDto">Organization id</param>
+            <returns></returns>
+        </member>
+        <member name="M:JWA.Api.Controllers.OrganizationsController.ActivateOrganization(JWA.Core.DTOs.ActivateOrganizationDto)">
+            <summary>
+            Activate organization.
+            </summary>
+            <param name="activateOrganizationDto">Organization id</param>
+            <returns></returns>
+        </member>
+        <member name="M:JWA.Api.Controllers.OrganizationsController.GetAll(JWA.Core.QueryFilters.OrganizationQueryFilter)">
+            <summary>
+            Retrieve all organizations.
+            </summary>
+            <param name="filters">Filters to apply</param>
+            <returns></returns>
+        </member>
+        <member name="M:JWA.Api.Controllers.OrganizationsController.GetOrganizationProfile(System.Int32)">
+            <summary>
+            Retrieve organization profile information.
+            </summary>
+            <param name="id">Organization id</param>
             <returns></returns>
         </member>
         <member name="M:JWA.Api.Controllers.SupervisorsController.Relocate(JWA.Core.DTOs.RelocateDto)">
@@ -53,11 +137,67 @@
             <param name="relocateDto">Relocation information</param>
             <returns></returns>
         </member>
-        <member name="M:JWA.Api.Controllers.UnitsController.Relocate(JWA.Core.DTOs.RelocateDto)">
+        <member name="M:JWA.Api.Controllers.UnitsController.Register(JWA.Core.DTOs.RegisterUnitDto)">
             <summary>
-            Relocate supervisor to another facility.
+            Register a unit.
             </summary>
-            <param name="relocateDto">Relocation information</param>
+            <param name="registerUnitDto">Unit's MacAddress</param>
+            <returns></returns>
+        </member>
+        <member name="M:JWA.Api.Controllers.UnitsController.AssignUnit(JWA.Core.DTOs.AssignUnitDto)">
+            <summary>
+            Assign unit to a facility.
+            </summary>
+            <param name="assignUnitDto">Unit information</param>
+            <returns></returns>
+        </member>
+        <member name="M:JWA.Api.Controllers.UnitsController.EditUnit(JWA.Core.DTOs.EditUnitDto)">
+            <summary>
+            Update unit's name and/or facility.
+            </summary>
+            <param name="editUnitDto">Unit information</param>
+            <returns></returns>
+        </member>
+        <member name="M:JWA.Api.Controllers.UnitsController.DetachUnit(JWA.Core.DTOs.DetachUnitDto)">
+            <summary>
+            Detach unit from facility.
+            </summary>
+            <param name="detachUnitDto">Unit id</param>
+            <returns></returns>
+        </member>
+        <member name="M:JWA.Api.Controllers.UnitsController.RebootUnit(JWA.Core.DTOs.RebootUnitDto)">
+            <summary>
+            Reboot unit.
+            </summary>
+            <param name="rebootUnitDto">Unit id</param>
+            <returns></returns>
+        </member>
+        <member name="M:JWA.Api.Controllers.UnitsController.GetAll(JWA.Core.QueryFilters.UnitQueryFilter)">
+            <summary>
+            Retrieve all units.
+            </summary>
+            <param name="filters">Filters to apply</param>
+            <returns></returns>
+        </member>
+        <member name="M:JWA.Api.Controllers.UnitsController.GetUnitProfile(System.Int32)">
+            <summary>
+            Retrieve unit profile information.
+            </summary>
+            <param name="id">Unit id</param>
+            <returns></returns>
+        </member>
+        <member name="M:JWA.Api.Controllers.UnitsController.GetFlushesHistory(JWA.Core.QueryFilters.FlushQueryFilter)">
+            <summary>
+            Retrieve flushes history.
+            </summary>
+            <param name="filters">Filters to apply</param>
+            <returns></returns>
+        </member>
+        <member name="M:JWA.Api.Controllers.UnitsController.GetAllUnassigned(JWA.Core.QueryFilters.BaseQueryFilter)">
+            <summary>
+            Retrieve all unassigned units.
+            </summary>
+            <param name="filters">Filters to apply</param>
             <returns></returns>
         </member>
         <member name="M:JWA.Api.Controllers.UsersController.GetAllAsync(JWA.Core.QueryFilters.UserQueryFilter)">

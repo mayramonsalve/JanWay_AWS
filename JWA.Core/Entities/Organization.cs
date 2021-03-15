@@ -13,6 +13,7 @@ namespace JWA.Core.Entities
         }
 
         public string Name { get; set; }
+        public string PhoneNumber { get; set; }
         public bool IsActive { get; set; }
         public int AddressId { get; set; }
         public DateTime CreationDate { get; set; }
@@ -21,5 +22,10 @@ namespace JWA.Core.Entities
         public virtual ICollection<Facility> Facilities { get; set; }
         public virtual ICollection<Supervisor> Supervisors { get; set; }
         public virtual ICollection<Invite> Invites { get; set; }
+
+        public static implicit operator Organization(Facility v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

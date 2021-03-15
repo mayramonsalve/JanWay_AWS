@@ -34,7 +34,8 @@ namespace JWA.Server
 
             services.Configure<ForwardedHeadersOptions>(options =>
             {
-                options.KnownProxies.Add(IPAddress.Parse("34.238.225.61"));
+                string ipAddress = Configuration.GetSection("IPAddress").Value;
+                options.KnownProxies.Add(IPAddress.Parse(ipAddress));
             });
 
             services.AddOptions(Configuration);
@@ -45,7 +46,7 @@ namespace JWA.Server
 
             services.AddSwagger($"{Assembly.GetExecutingAssembly().GetName().Name}.xml");
 
-            services.AddJwtAuthentication(Configuration);
+            //services.AddJwtAuthentication(Configuration);
 
             services.AddMvcExtension();
 

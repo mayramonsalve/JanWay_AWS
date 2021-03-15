@@ -6,9 +6,9 @@ using System.Text;
 
 namespace JWA.Infrastructure.Validators
 {
-    public class InviteValidator : AbstractValidator<InviteDtos>
+    public class InviteValidators : AbstractValidator<InviteDto>
     {
-        public InviteValidator()
+        public InviteValidators()
         {
             RuleFor(invite => invite.Email)
                 .NotEmpty().WithMessage("{PropertyName} must not be empty.")
@@ -17,6 +17,14 @@ namespace JWA.Infrastructure.Validators
 
             RuleFor(invite => invite.RoleId)
                 .NotNull().WithMessage("Role must not be empty.");
+
+            RuleFor(invite => invite.FacilityId)
+                .NotNull().WithMessage("Role must not be empty.")
+                .GreaterThan(0).WithMessage("{PropertyName} must greater than 0.");
+
+            RuleFor(invite => invite.OrganizationId)
+                .NotNull().WithMessage("Role must not be empty.")
+                .GreaterThan(0).WithMessage("{PropertyName} must greater than 0.");
         }
     }
 }

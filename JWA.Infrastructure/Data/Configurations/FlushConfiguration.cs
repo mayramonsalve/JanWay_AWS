@@ -12,8 +12,6 @@ namespace JWA.Infrastructure.Data.Configurations
 
             builder.Property(e => e.Id).HasColumnName("id");
 
-            builder.Property(e => e.BatteryLevel).HasColumnName("battery_level");
-
             builder.Property(e => e.CreationDate)
                 .HasColumnName("creation_date")
                 .HasDefaultValueSql("now()");
@@ -33,8 +31,6 @@ namespace JWA.Infrastructure.Data.Configurations
             builder.Property(e => e.Health).HasColumnName("health");
 
             builder.Property(e => e.Performance).HasColumnName("performance");
-
-            builder.Property(e => e.SelenoidTemperature).HasColumnName("selenoid_temperature");
 
             builder.Property(e => e.UnitId).HasColumnName("unit_id");
 

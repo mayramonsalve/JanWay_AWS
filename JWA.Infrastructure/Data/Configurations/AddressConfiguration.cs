@@ -29,9 +29,9 @@ namespace JWA.Infrastructure.Data.Configurations
 
             builder.Property(e => e.StateId).HasColumnName("state_id");
 
-            builder.Property(e => e.Street)
+            builder.Property(e => e.Description)
                 .IsRequired()
-                .HasColumnName("street")
+                .HasColumnName("description")
                 .HasMaxLength(100);
 
             builder.Property(e => e.ZipCode)
